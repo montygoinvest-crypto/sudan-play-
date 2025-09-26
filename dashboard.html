@@ -4,54 +4,427 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة التحكم - Sudan Play</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #D21034;
+            --secondary: #007A3D;
+            --dark: #333;
+            --light: #f8f9fa;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-            background: #f0f0f0;
+            background: #f5f7fb;
+            color: #333;
         }
-        .container {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            max-width: 500px;
-            margin: 0 auto;
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
         }
-        button {
-            background: #007A3D;
+
+        /* الشريط الجانبي */
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(180deg, var(--dark) 0%, var(--primary) 100%);
             color: white;
-            padding: 10px 20px;
+            padding: 0;
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-menu {
+            padding: 1rem 0;
+        }
+
+        .menu-item {
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-right: 4px solid transparent;
+        }
+
+        .menu-item:hover, .menu-item.active {
+            background: rgba(255,255,255,0.1);
+            border-right-color: var(--secondary);
+        }
+
+        /* المحتوى الرئيسي */
+        .main-content {
+            flex: 1;
+            padding: 0;
+        }
+
+        /* الشريط العلوي */
+        .topbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            padding: 0.7rem 1.5rem;
             border: none;
             border-radius: 5px;
-            margin: 10px;
             cursor: pointer;
         }
+
+        /* البطاقات الإحصائية */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .icon-downloads { background: var(--primary); }
+        .icon-users { background: var(--secondary); }
+        .icon-apps { background: #ff6b35; }
+
+        .stat-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.2rem;
+        }
+
+        /* محتوى البطاقات */
+        .content-section {
+            padding: 0 2rem 2rem;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: var(--primary);
+            color: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: right;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: var(--light);
+            font-weight: 600;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-sm {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        .btn-edit { background: var(--secondary); }
+        .btn-delete { background: #dc3545; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>لوحة التحكم - Sudan Play</h1>
-        <p>هذه صفحة لوحة التحكم الأساسية</p>
-        <button onclick="goBack()">العودة للرئيسية</button>
-        <button onclick="logout()">تسجيل خروج</button>
+    <div class="dashboard-container">
+        <!-- الشريط الجانبي -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-cog"></i> Sudan Play</h2>
+                <p>لوحة التحكم</p>
+            </div>
+            
+            <div class="sidebar-menu">
+                <div class="menu-item active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>لوحة التحكم</span>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>إدارة التطبيقات</span>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-users"></i>
+                    <span>المستخدمين</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- المحتوى الرئيسي -->
+        <div class="main-content">
+            <!-- الشريط العلوي -->
+            <div class="topbar">
+                <a href="index.html" class="back-btn">
+                    <i class="fas fa-arrow-right"></i> العودة للموقع
+                </a>
+                
+                <div class="user-info">
+                    <button onclick="logout()" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> تسجيل خروج
+                    </button>
+                    <div class="user-avatar">AD</div>
+                    <div>
+                        <div>مدير النظام</div>
+                        <small>admin</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- البطاقات الإحصائية -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon icon-downloads">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalDownloads">0</h3>
+                        <p>إجمالي التنزيلات</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon icon-users">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalUsers">0</h3>
+                        <p>المستخدمين</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon icon-apps">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalApps">0</h3>
+                        <p>التطبيقات</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- قسم التطبيقات -->
+            <div class="content-section">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-mobile-alt"></i> التطبيقات</h3>
+                        <button class="btn" onclick="addNewApp()">
+                            <i class="fas fa-plus"></i> إضافة تطبيق
+                        </button>
+                    </div>
+
+                    <div id="appsList">
+                        <!-- التطبيقات تظهر هنا -->
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        function goBack() {
-            window.location.href = 'index.html';
+        // تحقق من التسجيل
+        if (localStorage.getItem('sudanPlayAdmin') !== 'true') {
+            alert('يجب تسجيل الدخول أولاً');
+            window.location.href = 'login.html';
         }
-        
+
+        // دالة تسجيل الخروج
         function logout() {
             localStorage.removeItem('sudanPlayAdmin');
-            goBack();
+            window.location.href = 'index.html';
         }
-        
-        // تحقق من التسجيل
-        if (!localStorage.getItem('sudanPlayAdmin')) {
-            alert('يجب تسجيل الدخول أولاً');
-            goBack();
+
+        // دالة الحصول على التطبيقات
+        function getApps() {
+            return JSON.parse(localStorage.getItem('sudanPlayApps') || '[]');
         }
+
+        // دالة حفظ التطبيقات
+        function saveApps(apps) {
+            localStorage.setItem('sudanPlayApps', JSON.stringify(apps));
+        }
+
+        // دالة تحميل التطبيقات
+        function loadApps() {
+            const apps = getApps();
+            const container = document.getElementById('appsList');
+            
+            if (apps.length === 0) {
+                container.innerHTML = '<p style="text-align: center; padding: 2rem;">لا توجد تطبيقات بعد</p>';
+                return;
+            }
+            
+            container.innerHTML = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>اسم التطبيق</th>
+                            <th>الوصف</th>
+                            <th>التنزيلات</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${apps.map(app => `
+                            <tr>
+                                <td><strong>${app.name}</strong></td>
+                                <td>${app.description || 'لا يوجد وصف'}</td>
+                                <td>${app.downloads || 0}</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-edit" onclick="editApp(${app.id})">
+                                            تعديل
+                                        </button>
+                                        <button class="btn btn-sm btn-delete" onclick="deleteApp(${app.id})">
+                                            حذف
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        // دالة إضافة تطبيق جديد
+        function addNewApp() {
+            const name = prompt('أدخل اسم التطبيق الجديد:');
+            if (name) {
+                const apps = getApps();
+                const newApp = {
+                    id: Date.now(),
+                    name: name,
+                    description: 'تطبيق جديد',
+                    downloads: 0,
+                    status: 'active'
+                };
+                
+                apps.push(newApp);
+                saveApps(apps);
+                alert('تم إضافة التطبيق بنجاح!');
+                loadApps();
+                updateStats();
+            }
+        }
+
+        // دالة حذف تطبيق
+        function deleteApp(appId) {
+            if (confirm('هل أنت متأكد من الحذف؟')) {
+                const apps = getApps();
+                const newApps = apps.filter(app => app.id !== appId);
+                saveApps(newApps);
+                loadApps();
+                updateStats();
+            }
+        }
+
+        // دالة تحديث الإحصائيات
+        function updateStats() {
+            const apps = getApps();
+            const totalDownloads = apps.reduce((sum, app) => sum + (app.downloads || 0), 0);
+            const totalApps = apps.length;
+            
+            document.getElementById('totalDownloads').textContent = totalDownloads;
+            document.getElementById('totalApps').textContent = totalApps;
+            document.getElementById('totalUsers').textContent = Math.floor(totalDownloads / 3);
+        }
+
+        // عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            loadApps();
+            updateStats();
+            console.log('✅ لوحة التحكم جاهزة!');
+        });
     </script>
 </body>
 </html>
