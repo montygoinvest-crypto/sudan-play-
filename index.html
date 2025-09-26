@@ -377,7 +377,7 @@
                 <li><a href="#apps"><i class="fas fa-download"></i> التطبيقات</a></li>
                 <li><a href="#about"><i class="fas fa-info-circle"></i> عن الموقع</a></li>
                 <li><a href="#contact"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
-                <li><a href="login.html" class="admin-link" id="adminLoginLink">
+                <li><a href="javascript:void(0)" onclick="goToAdminPanel()" class="admin-link" id="adminLink">
                     <i class="fas fa-sign-in-alt"></i> دخول الإدارة
                 </a></li>
             </ul>
@@ -412,7 +412,7 @@
         <p>مرحباً بك <strong id="adminName">مدير النظام</strong>! يمكنك إدارة التطبيقات والمستخدمين من هنا.</p>
         
         <div class="admin-panel">
-            <a href="dashboard.html" class="admin-btn">
+            <a href="dashboard.html" class="admin-btn" onclick="return checkAccess()">
                 <i class="fas fa-tachometer-alt"></i> الانتقال للوحة التحكم
             </a>
             <button onclick="logout()" class="logout-btn">
@@ -486,12 +486,33 @@
 
     <!-- زر عائم للدخول السريع -->
     <div class="floating-admin">
-        <a href="login.html" class="floating-btn" id="floatingBtn">
+        <a href="javascript:void(0)" onclick="goToAdminPanel()" class="floating-btn" id="floatingBtn">
             <i class="fas fa-user-shield"></i>
         </a>
     </div>
 
     <script>
+        // دالة الذهاب للوحة التحكم أو التسجيل
+        function goToAdminPanel() {
+            if (isAdminLoggedIn()) {
+                // إذا مسجل دخول، اذهب للوحة التحكم مباشرة
+                window.location.href = 'dashboard.html';
+            } else {
+                // إذا مش مسجل، اذهب لصفحة التسجيل
+                window.location.href = 'login.html';
+            }
+        }
+
+        // دالة التحقق قبل الدخول للوحة التحكم
+        function checkAccess() {
+            if (!isAdminLoggedIn()) {
+                alert('يجب تسجيل الدخول أولاً');
+                window.location.href = 'login.html';
+                return false;
+            }
+            return true;
+        }
+
         // دالة لعرض الرسائل
         function showAlert(message, type = 'success') {
             const alert = document.getElementById('alertMessage');
@@ -596,24 +617,8 @@
 
         // عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', function() {
-            // التحقق من تسجيل الدخول
-            if (checkLogin()) {
-                // إظهار قسم الإدارة
-                document.getElementById('adminSection').style.display = 'block';
-                
-                // تحديث رابط الدخول
-                document.getElementById('adminLoginLink').innerHTML = '<i class="fas fa-tachometer-alt"></i> لوحة التحكم';
-                document.getElementById('adminLoginLink').href = 'dashboard.html';
-                
-                // تحديث الزر العائم
-                document.getElementById('floatingBtn').innerHTML = '<i class="fas fa-cog"></i>';
-                document.getElementById('floatingBtn').href = 'dashboard.html';
-                
-                // عرض اسم المسؤول
-                if (SUDAN_PLAY_CONFIG.currentUser) {
-                    document.getElementById('adminName').textContent = SUDAN_PLAY_CONFIG.currentUser.username;
-                }
-            }
+            // تحديث الروابط حسب حالة التسجيل
+            updateAdminLinks();
             
             // تحميل التطبيقات
             loadAppsFromStorage();
@@ -633,11 +638,38 @@
             });
         });
 
+        // دالة تحديث روابط الإدارة
+        function updateAdminLinks() {
+            const isAdmin = isAdminLoggedIn();
+            
+            if (isAdmin) {
+                // إظهار قسم الإدارة
+                document.getElementById('adminSection').style.display = 'block';
+                
+                // تحديث رابط القائمة
+                document.getElementById('adminLink').innerHTML = '<i class="fas fa-tachometer-alt"></i> لوحة التحكم';
+                
+                // تحديث الزر العائم
+                document.getElementById('floatingBtn').innerHTML = '<i class="fas fa-cog"></i>';
+                
+                // عرض اسم المسؤول
+                if (SUDAN_PLAY_CONFIG && SUDAN_PLAY_CONFIG.currentUser) {
+                    document.getElementById('adminName').textContent = SUDAN_PLAY_CONFIG.currentUser.username;
+                }
+            } else {
+                // إخفاء قسم الإدارة
+                document.getElementById('adminSection').style.display = 'none';
+            }
+        }
+
         // دالة تسجيل الخروج
         function logout() {
             if (confirm('هل تريد تسجيل الخروج؟')) {
-                logout();
+                logout(); // من config.js
                 showAlert('تم تسجيل الخروج بنجاح', 'success');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
             }
         }
     </script>
