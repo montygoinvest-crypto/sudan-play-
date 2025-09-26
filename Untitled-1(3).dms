@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudan Play - متجر التطبيقات السوداني</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --sudan-red: #D21034;
+            --sudan-white: #FFFFFF;
+            --sudan-black: #000000;
+            --sudan-green: #007A3D;
+            --gradient-primary: linear-gradient(135deg, #D21034 0%, #007A3D 100%);
+            --gradient-secondary: linear-gradient(135deg, #007A3D 0%, #000000 100%);
+            --gradient-hero: linear-gradient(135deg, rgba(210, 16, 52, 0.9) 0%, rgba(0, 122, 61, 0.9) 100%);
+            --text-dark: #333333;
+            --text-light: #FFFFFF;
+            --background-light: #F8F9FA;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* الهيدر */
+        header {
+            background: var(--gradient-primary);
+            padding: 1rem 2rem;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--sudan-white);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--sudan-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* الهيرو سيكشن */
+        .hero {
+            background: var(--gradient-hero), url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 6rem 2rem;
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: var(--shadow);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* قسم التطبيقات */
+        .apps-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .app-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--sudan-red);
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .download-btn {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(210, 16, 52, 0.3);
+        }
+
+        /* قسم عن الشركة */
+        .about-section {
+            padding: 5rem 2rem;
+            background: var(--gradient-secondary);
+            color: var(--text-light);
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* قسم الاتصال */
+        .contact-section {
+            padding: 5rem 2rem;
+            background: var(--background-light);
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            border-right: 4px solid var(--sudan-green);
+        }
+
+        .contact-item:hover {
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .contact-details h3 {
+            margin-bottom: 0.5rem;
+            color: var(--sudan-red);
+        }
+
+        .whatsapp-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--sudan-green);
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 0.5rem;
+        }
+
+        .whatsapp-link:hover {
+            text-decoration: underline;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-form h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--sudan-red);
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--sudan-green);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 122, 61, 0.1);
+        }
+
+        /* الفوتر */
+        footer {
+            background: var(--gradient-secondary);
+            padding: 3rem 2rem;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .company-info {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            background: var(--sudan-red);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .contact-container, .about-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header>
+        <nav class="nav-container">
+            <div class="logo">
+                <span>Sudan Play</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#apps">التطبيقات</a></li>
+                <li><a href="#about">عن الشركة</a></li>
+                <li><a href="#contact">اتصل بنا</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- الهيرو سيكشن -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>مرحبًا بك في Sudan Play</h1>
+            <p>المنصة الأولى لتطبيقات Android السودانية. حمّل أفضل التطبيقات المحلية مباشرة إلى جهازك</p>
+            <a href="#apps" class="cta-button">استكشف التطبيقات</a>
+        </div>
+    </section>
+
+    <!-- قسم التطبيقات -->
+    <section class="apps-section" id="apps">
+        <h2 class="section-title">تطبيقاتنا المميزة</h2>
+        <div class="apps-grid">
+            <!-- تطبيق 1 -->
+            <div class="app-card">
+                <div class="app-icon">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                <h3>تطبيق سوداني نيوز</h3>
+                <p>احصل على آخر الأخبار السودانية من مصادر موثوقة</p>
+                <a href="#" class="download-btn">تحميل APK</a>
+            </div>
+            
+            <!-- تطبيق 2 -->
+            <div class="app-card">
+                <div class="app-icon">
+                    <i class="fas fa-music"></i>
+                </div>
+                <h3>سودان ميوزك</h3>
+                <p>استمع لأفضل الموسيقى السودانية التقليدية والعصرية</p>
+                <a href="#" class="download-btn">تحميل APK</a>
+            </div>
+            
+            <!-- تطبيق 3 -->
+            <div class="app-card">
+                <div class="app-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h3>سوق سوداني</h3>
+                <p>منصة تسوق إلكتروني للسلع السودانية الأصيلة</p>
+                <a href="#" class="download-btn">تحميل APK</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم عن الشركة -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <div class="about-content">
+                <h2>عن شركة Monty Go</h2>
+                <p>تأسست شركة Monty Go SDN -Co-Ltd برؤية طموحة لتكون رائدة في مجال التكنولوجيا وتطوير التطبيقات في السودان. نحن نؤمن بقدرات المطورين السودانيين ونسعى لتوفير منصة تعرض إبداعاتهم للعالم.</p>
+                <p>يتكون فريقنا من مجموعة من المهندسين والمطورين والمصممين الموهوبين الذين يجمعهم شغف التكنولوجيا والابتكار. نعمل على تقديم حلول رقمية مبتكرة تلبي احتياجات المستخدم السوداني وتواكب أحدث التطورات العالمية.</p>
+                <p>من خلال Sudan Play، نهدف إلى خلق بيئة داعمة للمطورين المحليين وتوفير تطبيقات عالية الجودة تلبي متطلبات المجتمع السوداني في مختلف المجالات.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="فريق Monty Go">
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الاتصال -->
+    <section class="contact-section" id="contact">
+        <h2 class="section-title">اتصل بنا</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>البريد الإلكتروني</h3>
+                        <p>montygosdn@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>رقم الهاتف</h3>
+                        <p>+249127432167</p>
+                        <a href="https://wa.me/249127432167" class="whatsapp-link" target="_blank">
+                            <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>العنوان</h3>
+                        <p>الخرطوم، السودان</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h3>أرسل لنا رسالة</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" placeholder="اسمك" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="بريدك الإلكتروني" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="رسالتك" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button" style="width: 100%;">إرسال الرسالة</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="footer-content">
+            <h3>Sudan Play - من السودان إلى العالم</h3>
+            <p>منصة رائدة لتطبيقات Android المصممة خصيصًا للمستخدم السوداني</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            
+            <div class="company-info">
+                <p>© 2024 Sudan Play. جميع الحقوق محفوظة</p>
+                <p style="margin-top: 1rem; font-weight: bold; font-size: 1.1rem;">Monty Go SDN -Co-Ltd</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // كود جافا سكريبت بسيط للتفاعل
+        document.addEventListener('DOMContentLoaded', function() {
+            // تأثير سلس للروابط
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // معالجة نموذج الاتصال
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('شكرًا لك على رسالتك! سنتواصل معك قريبًا.');
+                this.reset();
+            });
+        });
+    </script>
+</body>
+</html>
