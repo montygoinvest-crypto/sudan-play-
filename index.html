@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sudan Play - المتجر السوداني لتطبيقات الأندرويد</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="config.js"></script>
     <style>
         * {
             margin: 0;
@@ -17,8 +16,6 @@
         :root {
             --sudan-red: #D21034;
             --sudan-green: #007A3D;
-            --sudan-black: #000000;
-            --sudan-white: #FFFFFF;
             --gradient: linear-gradient(135deg, #D21034 0%, #007A3D 100%);
         }
 
@@ -187,14 +184,6 @@
             box-shadow: 0 3px 10px rgba(0,0,0,0.2);
         }
 
-        .app-stats {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 1rem;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
         /* قسم الإدارة */
         .admin-section {
             background: linear-gradient(135deg, #e8f5e8 0%, #f0f8ff 100%);
@@ -300,27 +289,6 @@
             transform: scale(1.1) rotate(10deg);
         }
 
-        /* رسائل التنبيه */
-        .alert {
-            padding: 1rem;
-            border-radius: 5px;
-            margin: 1rem 0;
-            text-align: center;
-            display: none;
-        }
-
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .alert-error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .nav-container {
@@ -352,18 +320,66 @@
                 flex-direction: column;
                 align-items: center;
             }
-            
-            .floating-admin {
-                bottom: 20px;
-                left: 20px;
-            }
-            
-            .floating-btn {
-                width: 60px;
-                height: 60px;
-            }
         }
     </style>
+
+    <!-- بديل config.js - مدمج في ال head -->
+    <script>
+        // نظام الإدارة - بديل config.js
+        function isAdminLoggedIn() {
+            const status = localStorage.getItem('sudanPlayAdmin');
+            console.log('🔍 حالة المدير:', status);
+            return status === 'true';
+        }
+
+        function login(username, password) {
+            console.log('🔐 محاولة تسجيل:', username);
+            if (username === 'admin' && password === '123456') {
+                localStorage.setItem('sudanPlayAdmin', 'true');
+                console.log('✅ تسجيل ناجح');
+                return true;
+            }
+            console.log('❌ تسجيل فاشل');
+            return false;
+        }
+
+        function logout() {
+            console.log('🚪 تسجيل خروج');
+            localStorage.removeItem('sudanPlayAdmin');
+            window.location.href = 'index.html';
+        }
+
+        function getApps() {
+            const apps = localStorage.getItem('sudanPlayApps');
+            return apps ? JSON.parse(apps) : [];
+        }
+
+        function saveApps(apps) {
+            localStorage.setItem('sudanPlayApps', JSON.stringify(apps));
+        }
+
+        function addApp(appData) {
+            const apps = getApps();
+            appData.id = Date.now();
+            appData.downloads = 0;
+            appData.status = 'active';
+            apps.push(appData);
+            saveApps(apps);
+            return appData;
+        }
+
+        // دالة الذهاب للوحة التحكم
+        function goToAdminPanel() {
+            console.log('🔄 الذهاب للوحة التحكم');
+            if (isAdminLoggedIn()) {
+                window.location.href = 'dashboard.html';
+            } else {
+                window.location.href = 'login.html';
+            }
+        }
+
+        console.log('🚀 نظام Sudan Play جاهز!');
+    </script>
 </head>
 <body>
     <!-- الهيدر -->
@@ -376,16 +392,12 @@
                 <li><a href="index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
                 <li><a href="#apps"><i class="fas fa-download"></i> التطبيقات</a></li>
                 <li><a href="#about"><i class="fas fa-info-circle"></i> عن الموقع</a></li>
-                <li><a href="#contact"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
                 <li><a href="javascript:void(0)" onclick="goToAdminPanel()" class="admin-link" id="adminLink">
                     <i class="fas fa-sign-in-alt"></i> دخول الإدارة
                 </a></li>
             </ul>
         </nav>
     </header>
-
-    <!-- رسائل التنبيه -->
-    <div class="alert" id="alertMessage"></div>
 
     <!-- الهيرو سيكشن -->
     <section class="hero">
@@ -402,17 +414,17 @@
     <section class="apps-section" id="apps">
         <h2 class="section-title">تطبيقاتنا المميزة</h2>
         <div class="apps-grid" id="appsContainer">
-            <!-- التطبيقات سيتم تحميلها تلقائياً من النظام -->
+            <!-- التطبيقات تظهر هنا -->
         </div>
     </section>
 
     <!-- قسم الإدارة (يظهر للمسؤول فقط) -->
     <div class="admin-section" id="adminSection">
         <h3><i class="fas fa-cog"></i> لوحة التحكم</h3>
-        <p>مرحباً بك <strong id="adminName">مدير النظام</strong>! يمكنك إدارة التطبيقات والمستخدمين من هنا.</p>
+        <p>مرحباً بك <strong>admin</strong>! يمكنك إدارة التطبيقات والمستخدمين من هنا.</p>
         
         <div class="admin-panel">
-            <a href="dashboard.html" class="admin-btn" onclick="return checkAccess()">
+            <a href="dashboard.html" class="admin-btn" onclick="return checkDashboardAccess()">
                 <i class="fas fa-tachometer-alt"></i> الانتقال للوحة التحكم
             </a>
             <button onclick="logout()" class="logout-btn">
@@ -438,35 +450,8 @@
         </div>
     </div>
 
-    <!-- قسم عن الموقع -->
-    <section class="apps-section" id="about">
-        <h2 class="section-title">عن Sudan Play</h2>
-        <div style="background: white; padding: 2rem; border-radius: 15px; text-align: center;">
-            <h3 style="color: var(--sudan-green); margin-bottom: 1rem;">منصة التطبيقات السودانية الرائدة</h3>
-            <p style="line-height: 1.8; font-size: 1.1rem;">
-                Sudan Play هي المنصة الأولى المخصصة لتطبيقات الأندرويد السودانية. نحن نهدف إلى دعم المطورين المحليين 
-                وتوفير تطبيقات عالية الجودة تلبي احتياجات المجتمع السوداني. تم إنشاء هذه المنصة برؤية طموحة 
-                لتكون نافذة العالم على الإبداع السوداني في مجال التكنولوجيا.
-            </p>
-            <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
-                <div style="text-align: center;">
-                    <div style="font-size: 2rem; color: var(--sudan-green);"><i class="fas fa-download"></i></div>
-                    <div style="font-weight: bold;">تنزيلات آمنة</div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 2rem; color: var(--sudan-green);"><i class="fas fa-mobile-alt"></i></div>
-                    <div style="font-weight: bold;">تطبيقات محلية</div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="font-size: 2rem; color: var(--sudan-green);"><i class="fas fa-shield-alt"></i></div>
-                    <div style="font-weight: bold;">موثوق وآمن</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- الفوتر -->
-    <footer id="contact">
+    <footer>
         <div class="footer-content">
             <h3><i class="fas fa-globe-africa"></i> Sudan Play - من السودان إلى العالم</h3>
             <p>منصة رائدة لتطبيقات Android المصممة خصيصًا للمستخدم السوداني</p>
@@ -491,20 +476,10 @@
         </a>
     </div>
 
+    <!-- الكود الرئيسي -->
     <script>
-        // دالة الذهاب للوحة التحكم أو التسجيل
-        function goToAdminPanel() {
-            if (isAdminLoggedIn()) {
-                // إذا مسجل دخول، اذهب للوحة التحكم مباشرة
-                window.location.href = 'dashboard.html';
-            } else {
-                // إذا مش مسجل، اذهب لصفحة التسجيل
-                window.location.href = 'login.html';
-            }
-        }
-
         // دالة التحقق قبل الدخول للوحة التحكم
-        function checkAccess() {
+        function checkDashboardAccess() {
             if (!isAdminLoggedIn()) {
                 alert('يجب تسجيل الدخول أولاً');
                 window.location.href = 'login.html';
@@ -513,70 +488,58 @@
             return true;
         }
 
-        // دالة لعرض الرسائل
-        function showAlert(message, type = 'success') {
-            const alert = document.getElementById('alertMessage');
-            alert.textContent = message;
-            alert.className = `alert alert-${type}`;
-            alert.style.display = 'block';
+        // دالة إضافة تطبيق تجريبي
+        function addSampleApp() {
+            const sampleApps = [
+                {
+                    name: "سودان نيوز",
+                    description: "أحدث الأخبار السودانية من مصادر موثوقة"
+                },
+                {
+                    name: "سودان ميوزك", 
+                    description: "استمع لأفضل الموسيقى السودانية"
+                }
+            ];
             
-            setTimeout(() => {
-                alert.style.display = 'none';
-            }, 5000);
+            const randomApp = sampleApps[Math.floor(Math.random() * sampleApps.length)];
+            addApp(randomApp);
+            alert(`تم إضافة ${randomApp.name} بنجاح!`);
+            loadApps();
+            updateStats();
         }
 
-        // دالة تحميل التطبيقات من النظام
-        function loadAppsFromStorage() {
+        // دالة تحميل التطبيقات
+        function loadApps() {
             const apps = getApps();
-            const appsContainer = document.getElementById('appsContainer');
+            const container = document.getElementById('appsContainer');
             
             if (apps.length === 0) {
-                appsContainer.innerHTML = `
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
-                        <i class="fas fa-mobile-alt" style="font-size: 4rem; color: #ddd; margin-bottom: 1rem;"></i>
-                        <h3 style="color: #666;">لا توجد تطبيقات متاحة حالياً</h3>
-                        <p>سيتم إضافة التطبيقات قريباً...</p>
+                container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 2rem;">لا توجد تطبيقات بعد</p>';
+            } else {
+                container.innerHTML = apps.map(app => `
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>${app.name}</h3>
+                        <p>${app.description || 'تطبيق سوداني مميز'}</p>
+                        <button class="download-btn" onclick="downloadApp(${app.id})">
+                            <i class="fas fa-download"></i> تحميل التطبيق
+                        </button>
                     </div>
-                `;
-                return;
+                `).join('');
             }
-            
-            appsContainer.innerHTML = apps.map(app => `
-                <div class="app-card">
-                    <div class="app-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3>${app.name}</h3>
-                    <p>${app.description || 'تطبيق سوداني مميز'}</p>
-                    <div class="app-stats">
-                        <span><i class="fas fa-download"></i> ${app.downloads || 0}</span>
-                        <span><i class="fas fa-star"></i> ${app.rating || '4.5'}</span>
-                    </div>
-                    <button class="download-btn" onclick="downloadApp(${app.id})">
-                        <i class="fas fa-download"></i> تحميل التطبيق
-                    </button>
-                </div>
-            `).join('');
         }
 
         // دالة التحميل
         function downloadApp(appId) {
             const apps = getApps();
             const app = apps.find(a => a.id == appId);
-            
             if (app) {
-                // زيادة عدد التنزيلات
                 app.downloads = (app.downloads || 0) + 1;
                 saveApps(apps);
-                
-                showAlert(`جاري تحميل: ${app.name}`, 'success');
-                
-                // محاكاة عملية التحميل
-                setTimeout(() => {
-                    showAlert(`تم تحميل ${app.name} بنجاح!`, 'success');
-                    updateStats();
-                    loadAppsFromStorage(); // تحديث الواجهة
-                }, 2000);
+                alert(`جاري تحميل: ${app.name}`);
+                updateStats();
             }
         }
 
@@ -584,94 +547,35 @@
         function updateStats() {
             const apps = getApps();
             const totalDownloads = apps.reduce((sum, app) => sum + (app.downloads || 0), 0);
-            const totalApps = apps.length;
-            
-            document.getElementById('statsApps').textContent = totalApps;
-            document.getElementById('statsDownloads').textContent = totalDownloads.toLocaleString();
+            document.getElementById('statsApps').textContent = apps.length;
+            document.getElementById('statsDownloads').textContent = totalDownloads;
         }
 
-        // دالة إضافة تطبيق تجريبي
-        function addSampleApp() {
-            const sampleApps = [
-                {
-                    name: "سودان نيوز",
-                    description: "أحدث الأخبار السودانية من مصادر موثوقة",
-                    downloads: 0,
-                    rating: "4.5"
-                },
-                {
-                    name: "سودان ميوزك", 
-                    description: "استمع لأفضل الموسيقى السودانية",
-                    downloads: 0,
-                    rating: "4.8"
-                }
-            ];
+        // دالة تحديث الواجهة
+        function updateUI() {
+            const isAdmin = isAdminLoggedIn();
+            const adminSection = document.getElementById('adminSection');
+            const adminLink = document.getElementById('adminLink');
+            const floatingBtn = document.getElementById('floatingBtn');
             
-            const randomApp = sampleApps[Math.floor(Math.random() * sampleApps.length)];
-            addApp(randomApp);
-            
-            showAlert(`تم إضافة ${randomApp.name} بنجاح!`, 'success');
-            loadAppsFromStorage();
-            updateStats();
+            if (isAdmin) {
+                adminSection.style.display = 'block';
+                adminLink.innerHTML = '<i class="fas fa-tachometer-alt"></i> لوحة التحكم';
+                floatingBtn.innerHTML = '<i class="fas fa-cog"></i>';
+            } else {
+                adminSection.style.display = 'none';
+                adminLink.innerHTML = '<i class="fas fa-sign-in-alt"></i> دخول الإدارة';
+                floatingBtn.innerHTML = '<i class="fas fa-user-shield"></i>';
+            }
         }
 
         // عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', function() {
-            // تحديث الروابط حسب حالة التسجيل
-            updateAdminLinks();
-            
-            // تحميل التطبيقات
-            loadAppsFromStorage();
+            console.log('🏁 الصفحة جاهزة');
+            updateUI();
+            loadApps();
             updateStats();
-            
-            // إضافة تأثيرات للروابط
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
         });
-
-        // دالة تحديث روابط الإدارة
-        function updateAdminLinks() {
-            const isAdmin = isAdminLoggedIn();
-            
-            if (isAdmin) {
-                // إظهار قسم الإدارة
-                document.getElementById('adminSection').style.display = 'block';
-                
-                // تحديث رابط القائمة
-                document.getElementById('adminLink').innerHTML = '<i class="fas fa-tachometer-alt"></i> لوحة التحكم';
-                
-                // تحديث الزر العائم
-                document.getElementById('floatingBtn').innerHTML = '<i class="fas fa-cog"></i>';
-                
-                // عرض اسم المسؤول
-                if (SUDAN_PLAY_CONFIG && SUDAN_PLAY_CONFIG.currentUser) {
-                    document.getElementById('adminName').textContent = SUDAN_PLAY_CONFIG.currentUser.username;
-                }
-            } else {
-                // إخفاء قسم الإدارة
-                document.getElementById('adminSection').style.display = 'none';
-            }
-        }
-
-        // دالة تسجيل الخروج
-        function logout() {
-            if (confirm('هل تريد تسجيل الخروج؟')) {
-                logout(); // من config.js
-                showAlert('تم تسجيل الخروج بنجاح', 'success');
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1000);
-            }
-        }
     </script>
 </body>
 </html>
