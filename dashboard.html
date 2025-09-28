@@ -91,11 +91,6 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            transition: all 0.3s;
-        }
-
-        .back-btn:hover {
-            background: #b3001e;
         }
 
         .user-info {
@@ -114,7 +109,6 @@
             justify-content: center;
             color: white;
             font-weight: bold;
-            font-size: 1.1rem;
         }
 
         .logout-btn {
@@ -124,14 +118,6 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s;
-        }
-
-        .logout-btn:hover {
-            background: #c82333;
         }
 
         /* البطاقات الإحصائية */
@@ -150,11 +136,6 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            transition: transform 0.3s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
         }
 
         .stat-icon {
@@ -171,17 +152,10 @@
         .icon-downloads { background: var(--primary); }
         .icon-users { background: var(--secondary); }
         .icon-apps { background: #ff6b35; }
-        .icon-revenue { background: #6a11cb; }
 
         .stat-info h3 {
             font-size: 1.8rem;
             margin-bottom: 0.2rem;
-            color: var(--dark);
-        }
-
-        .stat-info p {
-            color: #666;
-            font-size: 0.9rem;
         }
 
         /* محتوى البطاقات */
@@ -202,13 +176,6 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #eee;
-        }
-
-        .card-header h3 {
-            color: var(--dark);
-            font-size: 1.3rem;
         }
 
         .btn {
@@ -216,90 +183,8 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
             background: var(--primary);
             color: white;
-        }
-
-        .btn-primary:hover {
-            background: #b3001e;
-        }
-
-        .btn-success {
-            background: var(--success);
-            color: white;
-        }
-
-        /* الجداول */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-
-        th, td {
-            padding: 1rem;
-            text-align: right;
-            border-bottom: 1px solid #eee;
-        }
-
-        th {
-            background: var(--light);
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        .status {
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .status-active {
-            background: #e7f7ef;
-            color: var(--success);
-        }
-
-        .status-pending {
-            background: #fff3cd;
-            color: var(--warning);
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .btn-sm {
-            padding: 0.4rem 0.8rem;
-            font-size: 0.8rem;
-        }
-
-        .btn-edit {
-            background: var(--secondary);
-            color: white;
-        }
-
-        .btn-edit:hover {
-            background: #00622c;
-        }
-
-        .btn-delete {
-            background: var(--danger);
-            color: white;
-        }
-
-        .btn-delete:hover {
-            background: #c82333;
         }
 
         /* نموذج الإضافة */
@@ -319,7 +204,6 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
-            color: var(--dark);
         }
 
         .form-control {
@@ -330,12 +214,206 @@
             font-size: 1rem;
         }
 
+        select.form-control {
+            height: 45px;
+        }
+
         textarea.form-control {
             resize: vertical;
             min-height: 100px;
         }
 
-        /* قسم لا يوجد بيانات */
+        /* معاينة الصور */
+        .image-preview {
+            display: none;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+
+        .image-preview img {
+            max-width: 200px;
+            max-height: 150px;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+        }
+
+        /* لقطات الشاشة */
+        .screenshots-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .screenshot-input-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .screenshot-input-group input {
+            flex: 1;
+        }
+
+        .remove-screenshot {
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            width: 40px;
+            cursor: pointer;
+        }
+
+        .add-screenshot-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* عرض التطبيقات */
+        .apps-container {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .app-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .app-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .app-info {
+            flex: 1;
+        }
+
+        .app-info h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--dark);
+            font-size: 1.3rem;
+        }
+
+        .app-info p {
+            color: #666;
+            margin: 0 0 0.5rem 0;
+            line-height: 1.5;
+        }
+
+        .app-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .app-meta span {
+            background: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .category {
+            background: var(--secondary) !important;
+            color: white !important;
+        }
+
+        /* لقطات الشاشة المعروضة */
+        .screenshots-gallery {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .screenshot-item {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid #ddd;
+            transition: transform 0.3s;
+        }
+
+        .screenshot-item:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+        }
+
+        .btn-edit {
+            background: var(--secondary);
+        }
+
+        .btn-delete {
+            background: var(--danger);
+        }
+
+        /* Modal للصورة الكبيرة */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            margin-top: 2%;
+            border-radius: 10px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* لا يوجد بيانات */
         .no-data {
             text-align: center;
             padding: 3rem;
@@ -346,33 +424,6 @@
             font-size: 3rem;
             margin-bottom: 1rem;
             color: #ddd;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .dashboard-container {
-                flex-direction: column;
-            }
-            
-            .sidebar {
-                width: 100%;
-                height: auto;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr;
-                padding: 1rem;
-            }
-            
-            .content-section {
-                padding: 0 1rem 1rem;
-            }
-            
-            .topbar {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
-            }
         }
     </style>
 </head>
@@ -394,14 +445,6 @@
                     <i class="fas fa-mobile-alt"></i>
                     <span>إدارة التطبيقات</span>
                 </div>
-                <div class="menu-item">
-                    <i class="fas fa-users"></i>
-                    <span>إدارة المستخدمين</span>
-                </div>
-                <div class="menu-item">
-                    <i class="fas fa-chart-bar"></i>
-                    <span>التقارير</span>
-                </div>
             </div>
         </div>
 
@@ -410,7 +453,7 @@
             <!-- الشريط العلوي -->
             <div class="topbar">
                 <a href="index.html" class="back-btn">
-                    <i class="fas fa-arrow-right"></i> العودة للموقع الرئيسي
+                    <i class="fas fa-arrow-right"></i> العودة للموقع
                 </a>
                 
                 <div class="user-info">
@@ -419,8 +462,8 @@
                     </button>
                     <div class="user-avatar">AD</div>
                     <div>
-                        <div>أحمد الدسوقي</div>
-                        <small>مدير النظام</small>
+                        <div>مدير النظام</div>
+                        <small>admin</small>
                     </div>
                 </div>
             </div>
@@ -432,7 +475,7 @@
                         <i class="fas fa-download"></i>
                     </div>
                     <div class="stat-info">
-                        <h3 id="totalDownloads">5,361</h3>
+                        <h3 id="totalDownloads">0</h3>
                         <p>إجمالي التنزيلات</p>
                     </div>
                 </div>
@@ -442,8 +485,8 @@
                         <i class="fas fa-users"></i>
                     </div>
                     <div class="stat-info">
-                        <h3 id="totalUsers">1,787</h3>
-                        <p>المستخدمين النشطين</p>
+                        <h3 id="totalUsers">0</h3>
+                        <p>المستخدمين</p>
                     </div>
                 </div>
                 
@@ -452,18 +495,8 @@
                         <i class="fas fa-mobile-alt"></i>
                     </div>
                     <div class="stat-info">
-                        <h3 id="totalApps">8</h3>
-                        <p>التطبيقات المنشورة</p>
-                    </div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon icon-revenue">
-                        <i class="fas fa-dollar-sign"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3 id="totalRevenue">536</h3>
-                        <p>الإيرادات ($)</p>
+                        <h3 id="totalApps">0</h3>
+                        <p>التطبيقات</p>
                     </div>
                 </div>
             </div>
@@ -473,7 +506,7 @@
                 <div class="content-card">
                     <div class="card-header">
                         <h3><i class="fas fa-mobile-alt"></i> إدارة التطبيقات</h3>
-                        <button class="btn btn-primary" onclick="showAppForm()">
+                        <button class="btn" onclick="showAppForm()">
                             <i class="fas fa-plus"></i> إضافة تطبيق جديد
                         </button>
                     </div>
@@ -481,63 +514,79 @@
                     <!-- نموذج إضافة تطبيق -->
                     <div class="form-container" id="appForm">
                         <h4>إضافة تطبيق جديد</h4>
+                        
                         <div class="form-group">
-                            <label>اسم التطبيق</label>
-                            <input type="text" id="appName" class="form-control" placeholder="أدخل اسم التطبيق">
+                            <label>اسم التطبيق *</label>
+                            <input type="text" id="appName" class="form-control" placeholder="أدخل اسم التطبيق" required>
                         </div>
+
                         <div class="form-group">
-                            <label>وصف التطبيق</label>
-                            <textarea id="appDescription" class="form-control" placeholder="أدخل وصف التطبيق"></textarea>
+                            <label>وصف التطبيق *</label>
+                            <textarea id="appDescription" class="form-control" placeholder="أدخل وصف مفصل للتطبيق" required></textarea>
                         </div>
+
                         <div class="form-group">
-                            <label>رابط التحميل</label>
-                            <input type="text" id="appUrl" class="form-control" placeholder="https://example.com/app.apk">
+                            <label>فئة التطبيق *</label>
+                            <select id="appCategory" class="form-control" required>
+                                <option value="">اختر الفئة</option>
+                                <option value="أخبار">أخبار</option>
+                                <option value="موسيقى">موسيقى</option>
+                                <option value="تسوق">تسوق</option>
+                                <option value="تعليم">تعليم</option>
+                                <option value="ترفيه">ترفيه</option>
+                                <option value="أدوات">أدوات</option>
+                                <option value="اجتماعي">اجتماعي</option>
+                            </select>
                         </div>
-                        <button class="btn btn-success" onclick="addNewApp()">
+
+                        <div class="form-group">
+                            <label>شعار التطبيق (URL) *</label>
+                            <input type="text" id="appIcon" class="form-control" placeholder="https://example.com/icon.png" required onchange="previewImage(this.value, 'iconPreview')">
+                            <div class="image-preview" id="iconPreview"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>لقطات الشاشة (URLs)</label>
+                            <div id="screenshotsInputs">
+                                <!-- الحقول تضاف هنا -->
+                            </div>
+                            <button type="button" class="add-screenshot-btn" onclick="addScreenshotField()">
+                                <i class="fas fa-plus"></i> إضافة لقطة شاشة
+                            </button>
+                        </div>
+
+                        <div class="form-group">
+                            <label>رابط التحميل (APK) *</label>
+                            <input type="text" id="appUrl" class="form-control" placeholder="https://example.com/app.apk" required>
+                        </div>
+
+                        <button class="btn" onclick="addNewApp()" style="background: var(--secondary);">
                             <i class="fas fa-save"></i> حفظ التطبيق
                         </button>
-                        <button class="btn" onclick="hideAppForm()" style="background: #6c757d; color: white;">
+                        <button class="btn" onclick="hideAppForm()" style="background: #6c757d;">
                             <i class="fas fa-times"></i> إلغاء
                         </button>
                     </div>
 
                     <!-- قائمة التطبيقات -->
-                    <div id="appsList">
+                    <div class="apps-container" id="appsList">
                         <!-- التطبيقات تظهر هنا -->
-                    </div>
-                </div>
-
-                <!-- قسم الإحصائيات السريعة -->
-                <div class="content-card">
-                    <div class="card-header">
-                        <h3><i class="fas fa-chart-line"></i> الإحصائيات السريعة</h3>
-                    </div>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                        <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
-                            <div style="font-size: 2rem; color: var(--primary);">📱</div>
-                            <div style="font-weight: bold;">أكثر تطبيق تحميلاً</div>
-                            <div style="color: #666;">سودان ميوزك</div>
-                        </div>
-                        <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
-                            <div style="font-size: 2rem; color: var(--secondary);">⭐</div>
-                            <div style="font-weight: bold;">أعلى تقييم</div>
-                            <div style="color: #666;">سودان نيوز</div>
-                        </div>
-                        <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
-                            <div style="font-size: 2rem; color: #ff6b35;">🆕</div>
-                            <div style="font-weight: bold;">أحدث إضافة</div>
-                            <div style="color: #666;">سوق سوداني</div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Modal لعرض الصورة الكبيرة -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
     <script>
         // تحقق من تسجيل الدخول
         if (localStorage.getItem('sudanPlayAdmin') !== 'true') {
-            alert('يجب تسجيل الدخول للوصول إلى لوحة التحكم');
+            alert('يجب تسجيل الدخول أولاً');
             window.location.href = 'login.html';
         }
 
@@ -546,32 +595,35 @@
             {
                 id: 1,
                 name: "سودان نيوز",
-                description: "تطبيق الأخبار السودانية - آخر المستجدات والأخبار العاجلة",
+                description: "تطبيق متكامل للأخبار السودانية يقدم آخر المستجدات والأخبار العاجلة من مختلف المصادر الموثوقة. يتميز بواجهة مستخدم بسيطة وسهلة الاستخدام.",
+                category: "أخبار",
+                icon: "https://images.unsplash.com/photo-1586339949216-35c2747cc36c?w=200&h=200&fit=crop",
+                screenshots: [
+                    "https://images.unsplash.com/photo-1556655848-f3a79cc6d4a9?w=300&h=600&fit=crop",
+                    "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=300&h=600&fit=crop"
+                ],
                 downloads: 1542,
                 version: "2.1.0",
                 status: "نشط",
                 rating: "4.8",
+                downloadUrl: "#",
                 createdAt: "2024-01-15"
             },
             {
                 id: 2, 
                 name: "سودان ميوزك",
-                description: "استمع لأفضل الموسيقى السودانية التقليدية والعصرية",
+                description: "منصة موسيقية شاملة تحتوي على أكبر مكتبة للموسيقى السودانية التقليدية والعصرية. استمع وتحميل أفضل الأغاني.",
+                category: "موسيقى",
+                icon: "https://images.unsplash.com/photo-1571974599782-87624638275f?w=200&h=200&fit=crop",
+                screenshots: [
+                    "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=300&h=600&fit=crop"
+                ],
                 downloads: 2876,
                 version: "1.5.2", 
                 status: "نشط",
                 rating: "4.9",
+                downloadUrl: "#",
                 createdAt: "2024-01-10"
-            },
-            {
-                id: 3,
-                name: "سوق سوداني",
-                description: "منصة تسوق إلكتروني للسلع والمنتجات السودانية الأصيلة",
-                downloads: 943,
-                version: "3.0.1",
-                status: "نشط",
-                rating: "4.6",
-                createdAt: "2024-01-20"
             }
         ];
 
@@ -579,7 +631,6 @@
         function getApps() {
             let apps = localStorage.getItem('sudanPlayApps');
             if (!apps) {
-                // إذا لا توجد بيانات، استخدم البيانات الافتراضية
                 saveApps(defaultApps);
                 return defaultApps;
             }
@@ -597,36 +648,81 @@
             window.location.href = 'index.html';
         }
 
-        // دالة عرض نموذج إضافة تطبيق
-        function showAppForm() {
-            document.getElementById('appForm').style.display = 'block';
+        // دالة معاينة الصورة
+        function previewImage(url, previewId) {
+            const preview = document.getElementById(previewId);
+            if (url) {
+                preview.innerHTML = `<img src="${url}" alt="معاينة الصورة" onerror="this.style.display='none'">`;
+                preview.style.display = 'block';
+            } else {
+                preview.style.display = 'none';
+            }
         }
 
-        // دالة إخفاء نموذج إضافة تطبيق
+        // دالة إضافة حقل لقطة شاشة
+        function addScreenshotField(url = '') {
+            const container = document.getElementById('screenshotsInputs');
+            const inputGroup = document.createElement('div');
+            inputGroup.className = 'screenshot-input-group';
+            inputGroup.style.marginBottom = '0.5rem';
+            inputGroup.innerHTML = `
+                <input type="text" class="form-control screenshot-url" placeholder="https://example.com/screenshot.png" value="${url}">
+                <button type="button" class="remove-screenshot" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            container.appendChild(inputGroup);
+        }
+
+        // دالة عرض نموذج الإضافة
+        function showAppForm() {
+            document.getElementById('appForm').style.display = 'block';
+            document.getElementById('screenshotsInputs').innerHTML = '';
+            addScreenshotField();
+        }
+
+        // دالة إخفاء نموذج الإضافة
         function hideAppForm() {
             document.getElementById('appForm').style.display = 'none';
-            // مسح الحقول
             document.getElementById('appName').value = '';
             document.getElementById('appDescription').value = '';
+            document.getElementById('appCategory').value = '';
+            document.getElementById('appIcon').value = '';
             document.getElementById('appUrl').value = '';
+            document.getElementById('iconPreview').style.display = 'none';
+            document.getElementById('screenshotsInputs').innerHTML = '';
         }
 
         // دالة إضافة تطبيق جديد
         function addNewApp() {
             const name = document.getElementById('appName').value;
             const description = document.getElementById('appDescription').value;
+            const category = document.getElementById('appCategory').value;
+            const icon = document.getElementById('appIcon').value;
             const url = document.getElementById('appUrl').value;
             
-            if (!name) {
-                alert('يرجى إدخال اسم التطبيق');
+            if (!name || !description || !category || !icon || !url) {
+                alert('يرجى ملء جميع الحقول الإلزامية (*)');
                 return;
             }
             
+            // جمع لقطات الشاشة
+            const screenshotInputs = document.querySelectorAll('.screenshot-url');
+            const screenshots = [];
+            screenshotInputs.forEach(input => {
+                if (input.value.trim()) {
+                    screenshots.push(input.value.trim());
+                }
+            });
+
             const newApp = {
                 id: Date.now(),
                 name: name,
                 description: description,
-                downloadUrl: url || '#',
+                category: category,
+                icon: icon,
+                screenshots: screenshots,
+                downloadUrl: url,
                 downloads: 0,
                 version: "1.0.0",
                 status: "نشط",
@@ -660,43 +756,51 @@
                 return;
             }
             
-            container.innerHTML = `
-                <table>
-                    <thead>
-                        <tr>
-                            <th>اسم التطبيق</th>
-                            <th>الوصف</th>
-                            <th>الإصدار</th>
-                            <th>التنزيلات</th>
-                            <th>التقييم</th>
-                            <th>الحالة</th>
-                            <th>الإجراءات</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${apps.map(app => `
-                            <tr>
-                                <td><strong>${app.name}</strong></td>
-                                <td>${app.description}</td>
-                                <td>${app.version}</td>
-                                <td>${app.downloads.toLocaleString()}</td>
-                                <td>⭐ ${app.rating}</td>
-                                <td><span class="status status-active">${app.status}</span></td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="btn btn-sm btn-edit" onclick="editApp(${app.id})">
-                                            <i class="fas fa-edit"></i> تعديل
-                                        </button>
-                                        <button class="btn btn-sm btn-delete" onclick="deleteApp(${app.id})">
-                                            <i class="fas fa-trash"></i> حذف
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
-                </table>
-            `;
+            container.innerHTML = apps.map(app => `
+                <div class="app-card">
+                    <div class="app-header">
+                        <img src="${app.icon}" alt="${app.name}" class="app-icon" onerror="this.src='https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=200&h=200&fit=crop'">
+                        <div class="app-info">
+                            <h4>${app.name}</h4>
+                            <p>${app.description}</p>
+                            <div class="app-meta">
+                                <span class="category">${app.category}</span>
+                                <span>الإصدار: ${app.version}</span>
+                                <span>التنزيلات: ${app.downloads.toLocaleString()}</span>
+                                <span>التقييم: ⭐ ${app.rating}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    ${app.screenshots && app.screenshots.length > 0 ? `
+                        <div class="screenshots-gallery">
+                            ${app.screenshots.map(screenshot => `
+                                <img src="${screenshot}" alt="لقطة شاشة" class="screenshot-item" onclick="openModal('${screenshot}')" onerror="this.style.display='none'">
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-sm btn-edit" onclick="editApp(${app.id})">
+                            <i class="fas fa-edit"></i> تعديل
+                        </button>
+                        <button class="btn btn-sm btn-delete" onclick="deleteApp(${app.id})">
+                            <i class="fas fa-trash"></i> حذف
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // دالة فتح الصورة في modal
+        function openModal(imageUrl) {
+            document.getElementById('modalImage').src = imageUrl;
+            document.getElementById('imageModal').style.display = 'block';
+        }
+
+        // دالة إغلاق modal
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
         }
 
         // دالة حذف تطبيق
@@ -716,13 +820,26 @@
             const apps = getApps();
             const app = apps.find(a => a.id === appId);
             if (app) {
-                const newName = prompt('اسم التطبيق الجديد:', app.name);
-                if (newName) {
-                    app.name = newName;
-                    saveApps(apps);
-                    loadApps();
-                    alert('تم تعديل التطبيق بنجاح');
-                }
+                // تعبئة النموذج بالبيانات الحالية
+                document.getElementById('appName').value = app.name;
+                document.getElementById('appDescription').value = app.description;
+                document.getElementById('appCategory').value = app.category;
+                document.getElementById('appIcon').value = app.icon;
+                document.getElementById('appUrl').value = app.downloadUrl;
+                previewImage(app.icon, 'iconPreview');
+                
+                // تعبئة لقطات الشاشة
+                document.getElementById('screenshotsInputs').innerHTML = '';
+                app.screenshots.forEach(screenshot => {
+                    addScreenshotField(screenshot);
+                });
+                
+                // إظهار النموذج
+                document.getElementById('appForm').style.display = 'block';
+                
+                // حذف التطبيق القديم
+                const updatedApps = apps.filter(a => a.id !== appId);
+                saveApps(updatedApps);
             }
         }
 
@@ -731,36 +848,25 @@
             const apps = getApps();
             const totalDownloads = apps.reduce((sum, app) => sum + app.downloads, 0);
             const totalApps = apps.length;
-            const totalUsers = Math.floor(totalDownloads / 3);
-            const totalRevenue = Math.floor(totalDownloads * 0.1);
             
             document.getElementById('totalDownloads').textContent = totalDownloads.toLocaleString();
             document.getElementById('totalApps').textContent = totalApps;
-            document.getElementById('totalUsers').textContent = totalUsers.toLocaleString();
-            document.getElementById('totalRevenue').textContent = totalRevenue.toLocaleString();
-        }
-
-        // محاكاة زيادة التنزيلات تلقائياً
-        function simulateDownloads() {
-            setInterval(() => {
-                const apps = getApps();
-                if (apps.length > 0) {
-                    const randomApp = apps[Math.floor(Math.random() * apps.length)];
-                    randomApp.downloads += Math.floor(Math.random() * 10) + 1;
-                    saveApps(apps);
-                    loadApps();
-                    updateStats();
-                }
-            }, 10000); // كل 10 ثواني
+            document.getElementById('totalUsers').textContent = Math.floor(totalDownloads / 3).toLocaleString();
         }
 
         // عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', function() {
             loadApps();
             updateStats();
-            simulateDownloads();
-            console.log('🚀 لوحة التحكم جاهزة ومليئة بالبيانات!');
         });
+
+        // إغلاق modal عند النقر خارج الصورة
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
     </script>
 </body>
 </html>
