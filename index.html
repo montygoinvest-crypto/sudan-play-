@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sudan Play - متجر التطبيقات السوداني</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="config.js"></script>
     <style>
         * {
             margin: 0;
@@ -80,15 +79,6 @@
         .nav-links a:hover {
             background: var(--gradient-light);
             color: var(--primary);
-        }
-
-        .admin-link {
-            background: var(--gradient);
-            color: white !important;
-        }
-
-        .admin-link:hover {
-            background: var(--primary) !important;
         }
 
         .hero {
@@ -493,7 +483,7 @@
                 <li><a href="#apps">التطبيقات</a></li>
                 <li><a href="#features">المميزات</a></li>
                 <li><a href="#contact">اتصل بنا</a></li>
-                <li><a href="dashboard.html" class="admin-link">لوحة التحكم</a></li>
+                <!-- تم إخفاء رابط لوحة التحكم -->
             </ul>
         </nav>
     </header>
@@ -589,20 +579,80 @@
     </div>
 
     <script>
+        // تضمين ملف config.js مباشرة (للتأكد من العمل)
+        const CONFIG = {
+            storageKey: "sudanPlayApps",
+            defaultAppIcon: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=200&h=200&fit=crop",
+            defaultAppImage: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=200&fit=crop"
+        };
+
+        function getApps() {
+            try {
+                const saved = localStorage.getItem(CONFIG.storageKey);
+                if (!saved) {
+                    // إذا لم توجد بيانات، نعيد بيانات افتراضية
+                    const defaultApps = [
+                        {
+                            id: 1,
+                            name: "سودان نيوز",
+                            description: "تطبيق متكامل يقدم آخر الأخبار السودانية من مصادر موثوقة.",
+                            category: "أخبار",
+                            icon: "https://images.unsplash.com/photo-1586339949216-35c2747cc36c?w=200&h=200&fit=crop",
+                            image: "https://images.unsplash.com/photo-1556655848-f3a79cc6d4a9?w=400&h=200&fit=crop",
+                            version: "2.1.0",
+                            rating: "4.8",
+                            downloads: 12543,
+                            size: "15 MB",
+                            screenshots: [
+                                "https://images.unsplash.com/photo-1556655848-f3a79cc6d4a9?w=300&h=600&fit=crop"
+                            ],
+                            downloadUrl: "#"
+                        },
+                        {
+                            id: 2, 
+                            name: "سودان ميوزك",
+                            description: "أكبر منصة موسيقية سودانية تحتوي على آلاف الأغاني.",
+                            category: "موسيقى",
+                            icon: "https://images.unsplash.com/photo-1571974599782-87624638275f?w=200&h=200&fit=crop",
+                            image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=200&fit=crop",
+                            version: "1.5.2", 
+                            rating: "4.9",
+                            downloads: 28764,
+                            size: "28 MB",
+                            screenshots: [
+                                "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=300&h=600&fit=crop"
+                            ],
+                            downloadUrl: "#"
+                        }
+                    ];
+                    localStorage.setItem(CONFIG.storageKey, JSON.stringify(defaultApps));
+                    return defaultApps;
+                }
+                return JSON.parse(saved);
+            } catch (e) {
+                console.error('Error loading apps:', e);
+                return [];
+            }
+        }
+
+        function getAppsByCategory(category) {
+            const apps = getApps();
+            console.log('Apps loaded:', apps); // للتأكد من تحميل البيانات
+            if (category === 'all') return apps;
+            return apps.filter(app => app.category === category);
+        }
+
         function loadApps(category = 'all') {
             const container = document.getElementById('appsContainer');
             const apps = getAppsByCategory(category);
             
-            console.log('Loading apps:', apps); // للتصحيح
+            console.log('Displaying apps:', apps); // للتأكد من العرض
             
             if (apps.length === 0) {
                 container.innerHTML = `
                     <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: #666;">
                         <i class="fas fa-mobile-alt" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
                         <p>لا توجد تطبيقات في هذه الفئة حالياً</p>
-                        <a href="dashboard.html" class="cta-button" style="margin-top: 1rem; display: inline-block;">
-                            <i class="fas fa-plus"></i> أضف تطبيقات من لوحة التحكم
-                        </a>
                     </div>
                 `;
                 return;
@@ -688,7 +738,9 @@
             document.getElementById('imageModal').style.display = 'none';
         }
 
+        // تحميل التطبيقات عند فتح الصفحة
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, loading apps...');
             loadApps();
             
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
