@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sudan Play - المتجر السوداني لتطبيقات الأندرويد</title>
+    <title>Sudan Play - متجر التطبيقات السوداني</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -69,11 +69,6 @@
             background: rgba(255,255,255,0.2);
         }
 
-        .admin-link {
-            background: rgba(255,255,255,0.2);
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-
         /* الهيرو سيكشن */
         .hero {
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
@@ -95,6 +90,12 @@
             margin-bottom: 1rem;
         }
 
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
         .cta-button {
             display: inline-block;
             background: var(--gradient);
@@ -102,7 +103,6 @@
             padding: 1rem 2rem;
             text-decoration: none;
             border-radius: 5px;
-            margin-top: 2rem;
             font-weight: bold;
             transition: all 0.3s;
         }
@@ -134,7 +134,7 @@
             display: flex;
             justify-content: center;
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             flex-wrap: wrap;
         }
 
@@ -275,41 +275,32 @@
             font-size: 0.9rem;
         }
 
-        /* قسم الإدارة */
-        .admin-section {
-            background: linear-gradient(135deg, #e8f5e8 0%, #f0f8ff 100%);
-            padding: 3rem 2rem;
-            margin: 2rem auto;
-            max-width: 1200px;
-            border-radius: 15px;
+        /* قسم المميزات */
+        .features {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 4rem 2rem;
             text-align: center;
-            border: 3px solid var(--sudan-green);
         }
 
-        .admin-panel {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .admin-btn {
-            background: var(--sudan-green);
-            color: white;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s;
-            font-weight: bold;
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .admin-btn:hover {
-            background: var(--sudan-red);
-            transform: translateY(-2px);
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--sudan-green);
+            margin-bottom: 1rem;
         }
 
         /* الفوتر */
@@ -318,7 +309,6 @@
             color: white;
             padding: 3rem 2rem;
             text-align: center;
-            margin-top: 4rem;
         }
 
         .footer-content {
@@ -330,6 +320,23 @@
             margin-top: 2rem;
             padding-top: 2rem;
             border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--sudan-green);
         }
 
         /* Modal للصورة الكبيرة */
@@ -363,33 +370,6 @@
             cursor: pointer;
         }
 
-        /* زر لوحة التحكم المنفصل */
-        .dashboard-floating {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            z-index: 1000;
-        }
-
-        .dashboard-btn {
-            background: var(--gradient);
-            color: white;
-            padding: 1rem 1.5rem;
-            text-decoration: none;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            transition: all 0.3s;
-            font-weight: bold;
-        }
-
-        .dashboard-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .nav-container {
@@ -414,19 +394,8 @@
                 grid-template-columns: 1fr;
             }
             
-            .admin-panel {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .dashboard-floating {
-                bottom: 20px;
-                left: 20px;
-            }
-            
-            .dashboard-btn {
-                padding: 0.8rem 1.2rem;
-                font-size: 0.9rem;
+            .features-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -441,7 +410,7 @@
             <ul class="nav-links">
                 <li><a href="#home">الرئيسية</a></li>
                 <li><a href="#apps">التطبيقات</a></li>
-                <li><a href="#about">عن الموقع</a></li>
+                <li><a href="#features">المميزات</a></li>
                 <li><a href="#contact">اتصل بنا</a></li>
             </ul>
         </nav>
@@ -450,10 +419,10 @@
     <!-- الهيرو سيكشن -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1>مرحباً بك في Sudan Play</h1>
-            <p>المنصة الأولى لتطبيقات الأندرويد السودانية. اكتشف أفضل التطبيقات المحلية المصممة خصيصاً لمجتمعنا</p>
+            <h1>اكتشف عالم التطبيقات السودانية</h1>
+            <p>منصة Sudan Play تقدم لك أفضل التطبيقات المحلية المصممة خصيصاً لمجتمعنا السوداني. حمّل واستمتع بتجربة فريدة</p>
             <a href="#apps" class="cta-button">
-                <i class="fas fa-rocket"></i> استكشف التطبيقات
+                <i class="fas fa-rocket"></i> ابدأ التصفح الآن
             </a>
         </div>
     </section>
@@ -464,12 +433,11 @@
         
         <!-- فئات التطبيقات -->
         <div class="categories">
-            <button class="category-btn active" onclick="filterApps('all')">الكل</button>
+            <button class="category-btn active" onclick="filterApps('all')">جميع التطبيقات</button>
             <button class="category-btn" onclick="filterApps('أخبار')">أخبار</button>
             <button class="category-btn" onclick="filterApps('موسيقى')">موسيقى</button>
             <button class="category-btn" onclick="filterApps('تسوق')">تسوق</button>
             <button class="category-btn" onclick="filterApps('تعليم')">تعليم</button>
-            <button class="category-btn" onclick="filterApps('ترفيه')">ترفيه</button>
         </div>
 
         <div class="apps-grid" id="appsContainer">
@@ -477,31 +445,66 @@
         </div>
     </section>
 
+    <!-- قسم المميزات -->
+    <section class="features" id="features">
+        <h2 class="section-title">لماذا تختار Sudan Play؟</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>آمن ومضمون</h3>
+                <p>جميع التطبيقات خاضعة لفحص دقيق لضمان أمانها وسلامتها</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>تحميل سريع</h3>
+                <p>خوادم سريعة تضمن تحميل التطبيقات بأقصى سرعة ممكنة</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3>جودة عالية</h3>
+                <p>تطبيقات عالية الجودة مصممة خصيصاً للمستخدم السوداني</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>دعم فني</h3>
+                <p>فريق دعم فني متاح لمساعدتك في أي وقت</p>
+            </div>
+        </div>
+    </section>
+
     <!-- الفوتر -->
     <footer id="contact">
         <div class="footer-content">
-            <h3><i class="fas fa-globe-africa"></i> Sudan Play - من السودان إلى العالم</h3>
-            <p>منصة رائدة لتطبيقات Android المصممة خصيصًا للمستخدم السوداني</p>
+            <h3><i class="fas fa-globe-africa"></i> Sudan Play</h3>
+            <p>منصة التطبيقات السودانية الرائدة - نوفر أفضل التجارب الرقمية لمجتمعنا</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+            </div>
             
             <div class="company-info">
-                <p>© 2024 جميع الحقوق محفوظة</p>
+                <p>© 2024 جميع الحقوق محفوظة لشركة Sudan Play</p>
                 <p style="margin-top: 0.5rem; font-weight: bold; font-size: 1.1rem;">
                     <i class="fas fa-building"></i> Monty Go SDN -Co-Ltd
                 </p>
                 <p style="margin-top: 0.5rem;">
-                    <i class="fas fa-envelope"></i> montygosdn@gmail.com | 
+                    <i class="fas fa-envelope"></i> info@sudanplay.com | 
                     <i class="fas fa-phone"></i> 249127432167+
                 </p>
             </div>
         </div>
     </footer>
-
-    <!-- زر لوحة التحكم المنفصل -->
-    <div class="dashboard-floating">
-        <a href="login.html" class="dashboard-btn">
-            <i class="fas fa-tachometer-alt"></i> لوحة التحكم
-        </a>
-    </div>
 
     <!-- Modal للصورة الكبيرة -->
     <div id="imageModal" class="modal">
@@ -510,39 +513,107 @@
     </div>
 
     <script>
-        // دالة الحصول على التطبيقات
-        function getApps() {
-            const apps = localStorage.getItem('sudanPlayApps');
-            return apps ? JSON.parse(apps) : [];
-        }
+        // بيانات التطبيقات الحقيقية
+        const realApps = [
+            {
+                id: 1,
+                name: "سودان نيوز",
+                description: "تطبيق متكامل يقدم آخر الأخبار السودانية من مصادر موثوقة. احصل على التحديثات الفورية والأخبار العاجلة في جميع المجالات السياسية والاقتصادية والرياضية.",
+                category: "أخبار",
+                icon: "https://images.unsplash.com/photo-1586339949216-35c2747cc36c?w=200&h=200&fit=crop",
+                screenshots: [
+                    "https://images.unsplash.com/photo-1556655848-f3a79cc6d4a9?w=300&h=600&fit=crop",
+                    "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=300&h=600&fit=crop"
+                ],
+                downloads: 12543,
+                version: "2.1.0",
+                rating: "4.8",
+                size: "15 MB",
+                downloadUrl: "#"
+            },
+            {
+                id: 2, 
+                name: "سودان ميوزك",
+                description: "أكبر منصة موسيقية سودانية تحتوي على آلاف الأغاني من التراث السوداني والموسيقى المعاصرة. استمع وتحميل ومشاركة أفضل الألحان.",
+                category: "موسيقى",
+                icon: "https://images.unsplash.com/photo-1571974599782-87624638275f?w=200&h=200&fit=crop",
+                screenshots: [
+                    "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=300&h=600&fit=crop"
+                ],
+                downloads: 28764,
+                version: "1.5.2", 
+                rating: "4.9",
+                size: "28 MB",
+                downloadUrl: "#"
+            },
+            {
+                id: 3,
+                name: "سوق سوداني",
+                description: "منصة تسوق إلكتروني تتيح لك شراء وبيع المنتجات السودانية الأصيلة. تسوق من آلاف المتاجر المحلية بثقة وسهولة.",
+                category: "تسوق",
+                icon: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=200&h=200&fit=crop",
+                screenshots: [
+                    "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=300&h=600&fit=crop",
+                    "https://images.unsplash.com/photo-1556742044-3c52d6e88c62?w=300&h=600&fit=crop"
+                ],
+                downloads: 8943,
+                version: "3.0.1",
+                rating: "4.6",
+                size: "42 MB",
+                downloadUrl: "#"
+            },
+            {
+                id: 4,
+                name: "تعلم العربية",
+                description: "تطبيق تعليمي مميز لتعليم اللغة العربية بأسلوب تفاعلي. مناسب لجميع الأعمال مع دروس متنوعة وتمارين تفاعلية.",
+                category: "تعليم",
+                icon: "https://images.unsplash.com/photo-1589998059171-988d887df646?w=200&h=200&fit=crop",
+                screenshots: [
+                    "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=300&h=600&fit=crop"
+                ],
+                downloads: 15632,
+                version: "1.2.3",
+                rating: "4.7",
+                size: "35 MB",
+                downloadUrl: "#"
+            },
+            {
+                id: 5,
+                name: "أخبار الرياضة",
+                description: "تابع آخر أخبار الرياضة السودانية والعالمية. تغطية شاملة للدوري السوداني وبطولات أفريقيا والعالم.",
+                category: "أخبار",
+                icon: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=200&h=200&fit=crop",
+                screenshots: [
+                    "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=300&h=600&fit=crop"
+                ],
+                downloads: 9876,
+                version: "2.0.5",
+                rating: "4.5",
+                size: "22 MB",
+                downloadUrl: "#"
+            },
+            {
+                id: 6,
+                name: "موسيقى حضرية",
+                description: "استمع لأحدث الأغاني الحضرية السودانية. تطبيق مخصص لعشاق الموسيقى الحضرية بميزات متقدمة.",
+                category: "موسيقى",
+                icon: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=200&h=200&fit=crop",
+                screenshots: [
+                    "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=600&fit=crop"
+                ],
+                downloads: 13456,
+                version: "1.8.2",
+                rating: "4.4",
+                size: "31 MB",
+                downloadUrl: "#"
+            }
+        ];
 
         // دالة تحميل التطبيقات
         function loadApps(category = 'all') {
-            const apps = getApps();
             const container = document.getElementById('appsContainer');
             
-            if (apps.length === 0) {
-                container.innerHTML = `
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 4rem;">
-                        <i class="fas fa-mobile-alt" style="font-size: 4rem; color: #ddd; margin-bottom: 1rem;"></i>
-                        <h3 style="color: #666;">لا توجد تطبيقات متاحة حالياً</h3>
-                        <p>سيتم إضافة التطبيقات قريباً...</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            const filteredApps = category === 'all' ? apps : apps.filter(app => app.category === category);
-            
-            if (filteredApps.length === 0) {
-                container.innerHTML = `
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
-                        <i class="fas fa-search" style="font-size: 3rem; color: #ddd; margin-bottom: 1rem;"></i>
-                        <h3 style="color: #666;">لا توجد تطبيقات في هذه الفئة</h3>
-                    </div>
-                `;
-                return;
-            }
+            const filteredApps = category === 'all' ? realApps : realApps.filter(app => app.category === category);
             
             container.innerHTML = filteredApps.map(app => `
                 <div class="app-card">
@@ -568,9 +639,9 @@
                         
                         <div class="app-stats">
                             <div class="app-meta">
-                                <span><i class="fas fa-download"></i> ${app.downloads || 0}</span>
-                                <span><i class="fas fa-star"></i> ${app.rating || '4.5'}</span>
-                                <span>v${app.version || '1.0.0'}</span>
+                                <span><i class="fas fa-download"></i> ${app.downloads.toLocaleString()}</span>
+                                <span><i class="fas fa-star"></i> ${app.rating}</span>
+                                <span>${app.size}</span>
                             </div>
                             <button class="download-btn" onclick="downloadApp(${app.id})">
                                 <i class="fas fa-download"></i> تحميل
@@ -595,14 +666,9 @@
 
         // دالة التحميل
         function downloadApp(appId) {
-            const apps = getApps();
-            const app = apps.find(a => a.id == appId);
+            const app = realApps.find(a => a.id == appId);
             
             if (app) {
-                // زيادة عدد التنزيلات
-                app.downloads = (app.downloads || 0) + 1;
-                localStorage.setItem('sudanPlayApps', JSON.stringify(apps));
-                
                 // محاكاة عملية التحميل
                 const originalText = event.target.innerHTML;
                 event.target.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التحميل...';
