@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudan Play - متجر التطبيقات السوداني</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: rgb(74, 107, 255);
+            --secondary: rgb(255, 94, 125);
+            --accent: rgb(46, 196, 182);
+            --dark: rgb(30, 30, 45);
+            --light: rgb(248, 249, 254);
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --gradient-light: linear-gradient(135deg, rgba(74, 107, 255, 0.1) 0%, rgba(255, 94, 125, 0.1) 100%);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* الهيدر */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: var(--dark);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background: var(--gradient-light);
+            color: var(--primary);
+        }
+
+        /* الهيرو سيكشن */
+        .hero {
+            background: linear-gradient(rgba(30, 30, 45, 0.85), rgba(30, 30, 45, 0.9)), 
+                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 8rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient);
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* قسم التطبيقات */
+        .apps-section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 4rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 5px;
+            background: var(--gradient);
+            margin: 1rem auto;
+            border-radius: 5px;
+        }
+
+        /* فئات التطبيقات */
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background: white;
+            border: 2px solid rgba(74, 107, 255, 0.1);
+            padding: 0.8rem 1.8rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            color: var(--dark);
+            box-shadow: var(--shadow);
+        }
+
+        .category-btn.active,
+        .category-btn:hover {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .app-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            position: relative;
+            border: 1px solid rgba(74, 107, 255, 0.05);
+        }
+
+        .app-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .app-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .app-card:hover .app-image {
+            transform: scale(1.05);
+        }
+
+        .app-content {
+            padding: 2rem;
+        }
+
+        .app-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .app-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 18px;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: var(--shadow);
+        }
+
+        .app-title {
+            flex: 1;
+        }
+
+        .app-title h3 {
+            margin: 0 0 0.5rem 0;
+            color: var(--dark);
+            font-size: 1.4rem;
+        }
+
+        .app-category {
+            background: var(--gradient);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .app-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .app-screenshots {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .screenshot {
+            width: 90px;
+            height: 90px;
+            border-radius: 12px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .screenshot:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .app-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .download-btn {
+            background: var(--gradient);
+            color: white;
+            padding: 0.9rem 1.8rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .app-meta {
+            display: flex;
+            gap: 1.2rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .app-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* قسم المميزات */
+        .features {
+            background: var(--light);
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--gradient);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-size: 1.4rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* الفوتر */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-content p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+
+        .company-info {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links a:hover {
+            background: var(--gradient);
+            transform: translateY(-5px);
+        }
+
+        /* Modal للصورة الكبيرة */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            margin-top: 2%;
+            border-radius: 10px;
+            animation: zoomIn 0.3s;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--secondary);
+        }
+
+        /* شريط التمرير المخصص */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero {
+                padding: 5rem 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .apps-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .app-stats {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .app-meta {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header>
+        <nav class="nav-container">
+            <div class="logo">
+                <h2><i class="fas fa-mobile-alt"></i> Sudan Play</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#apps">التطبيقات</a></li>
+                <li><a href="#features">المميزات</a></li>
+                <li><a href="#contact">اتصل بنا</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- الهيرو سيكشن -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>اكتشف عالم التطبيقات السودانية</h1>
+            <p>منصة Sudan Play تقدم لك أفضل التطبيقات المحلية المصممة خصيصاً لمجتمعنا السوداني. حمّل واستمتع بتجربة فريدة</p>
+            <a href="#apps" class="cta-button">
+                <i class="fas fa-rocket"></i> ابدأ التصفح الآن
+            </a>
+        </div>
+    </section>
+
+    <!-- قسم التطبيقات -->
+    <section class="apps-section" id="apps">
+        <h2 class="section-title">التطبيقات</h2>
+        
+        <!-- فئات التطبيقات -->
+        <div class="categories">
+            <button class="category-btn active" onclick="filterApps('all')">جميع التطبيقات</button>
+            <button class="category-btn" onclick="filterApps('أخبار')">أخبار</button>
+            <button class="category-btn" onclick="filterApps('موسيقى')">موسيقى</button>
+            <button class="category-btn" onclick="filterApps('تسوق')">تسوق</button>
+            <button class="category-btn" onclick="filterApps('تعليم')">تعليم</button>
+           
+        </div>
+
+        <div class="apps-grid" id="appsContainer">
+            <!-- التطبيقات تظهر هنا -->
+        </div>
+    </section>
+
+    <!-- قسم المميزات -->
+    <section class="features" id="features">
+        <h2 class="section-title"> Sudan Play</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>آمن ومضمون</h3>
+                <p>جميع التطبيقات خاضعة لفحص دقيق لضمان أمانها وسلامتها</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>تحميل سريع</h3>
+                <p>خوادم سريعة تضمن تحميل التطبيقات بأقصى سرعة ممكنة</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3>جودة عالية</h3>
+                <p>تطبيقات عالية الجودة مصممة خصيصاً للمستخدم السوداني</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>دعم فني</h3>
+                <p>فريق دعم فني متاح لمساعدتك في أي وقت</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer id="contact">
+        <div class="footer-content">
+            <h3><i class="fas fa-globe-africa"></i> Sudan Play-for Monty GO SDN CO-LTD</h3>
+            <p>منصة التطبيقات السودانية الرائدة - نوفر أفضل التجارب الرقمية لمجتمعنا</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+            </div>
+            
+            <div class="company-info">
+                <p>© 2025 جميع الحقوق محفوظة  Sudan Play</p>
+                <p style="margin-top: 0.5rem; font-weight: bold; font-size: 1.1rem;">
+                    <i class="fas fa-building"></i> Monty Go SDN -Co-Ltd
+                </p>
+                <p style="margin-top: 0.5rem;">
+                    <i class="fas fa-envelope"></i> montygosdn@gmail.com | 
+                    <i class="fas fa-phone"></i> 249127432167+ watsapp
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal للصورة الكبيرة -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        // بيانات التطبيقات الحقيقية
+        const realApps = [
+             [
+          
+
+        // دالة تحميل التطبيقات
+        function loadApps(category = 'all') {
+            const container = document.getElementById('appsContainer');
+            
+            const filteredApps = category === 'all' ? realApps : realApps.filter(app => app.category === category);
+            
+            container.innerHTML = filteredApps.map(app => `
+                <div class="app-card">
+                    <img src="${app.icon}" alt="${app.name}" class="app-image" onerror="this.src='https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=200&fit=crop'">
+                    <div class="app-content">
+                        <div class="app-header">
+                            <img src="${app.icon}" alt="${app.name}" class="app-icon" onerror="this.src='https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=200&h=200&fit=crop'">
+                            <div class="app-title">
+                                <h3>${app.name}</h3>
+                                <span class="app-category">${app.category}</span>
+                            </div>
+                        </div>
+                        
+                        <p class="app-description">${app.description}</p>
+                        
+                        ${app.screenshots && app.screenshots.length > 0 ? `
+                            <div class="app-screenshots">
+                                ${app.screenshots.map(screenshot => `
+                                    <img src="${screenshot}" alt="لقطة شاشة" class="screenshot" onclick="openModal('${screenshot}')" onerror="this.style.display='none'">
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                        
+                        <div class="app-stats">
+                            <div class="app-meta">
+                                <span><i class="fas fa-download"></i> ${app.downloads.toLocaleString()}</span>
+                                <span><i class="fas fa-star"></i> ${app.rating}</span>
+                                <span>${app.size}</span>
+                            </div>
+                            <button class="download-btn" onclick="downloadApp(${app.id})">
+                                <i class="fas fa-download"></i> تحميل
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // دالة تصفية التطبيقات
+        function filterApps(category) {
+            // تحديث الأزرار النشطة
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // تحميل التطبيقات المصفاة
+            loadApps(category);
+        }
+
+        // دالة التحميل
+        function downloadApp(appId) {
+            const app = realApps.find(a => a.id == appId);
+            
+            if (app) {
+                // محاكاة عملية التحميل
+                const originalText = event.target.innerHTML;
+                event.target.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التحميل...';
+                event.target.disabled = true;
+                
+                setTimeout(() => {
+                    event.target.innerHTML = '<i class="fas fa-check"></i> تم التحميل';
+                    
+                    setTimeout(() => {
+                        event.target.innerHTML = originalText;
+                        event.target.disabled = false;
+                        
+                        // إذا كان هناك رابط تحميل، افتحه
+                        if (app.downloadUrl && app.downloadUrl !== '#') {
+                            window.open(app.downloadUrl, '_blank');
+                        } else {
+                            alert(`تم تحميل ${app.name} بنجاح!\n\nسيتم تثبيت التطبيق على جهازك.`);
+                        }
+                    }, 1000);
+                }, 2000);
+            }
+        }
+
+        // دالة فتح الصورة في modal
+        function openModal(imageUrl) {
+            document.getElementById('modalImage').src = imageUrl;
+            document.getElementById('imageModal').style.display = 'block';
+        }
+
+        // دالة إغلاق modal
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            loadApps();
+            
+            // إضافة تأثيرات للروابط
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+
+        // إغلاق modal عند النقر خارج الصورة
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
