@@ -18,6 +18,9 @@
             --secondary: #007A3D;
             --dark: #333;
             --light: #f8f9fa;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
         }
 
         body {
@@ -88,6 +91,11 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #b3001e;
         }
 
         .user-info {
@@ -106,15 +114,24 @@
             justify-content: center;
             color: white;
             font-weight: bold;
+            font-size: 1.1rem;
         }
 
         .logout-btn {
-            background: #dc3545;
+            background: var(--danger);
             color: white;
             padding: 0.7rem 1.5rem;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #c82333;
         }
 
         /* البطاقات الإحصائية */
@@ -133,6 +150,11 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
         }
 
         .stat-icon {
@@ -149,10 +171,17 @@
         .icon-downloads { background: var(--primary); }
         .icon-users { background: var(--secondary); }
         .icon-apps { background: #ff6b35; }
+        .icon-revenue { background: #6a11cb; }
 
         .stat-info h3 {
             font-size: 1.8rem;
             margin-bottom: 0.2rem;
+            color: var(--dark);
+        }
+
+        .stat-info p {
+            color: #666;
+            font-size: 0.9rem;
         }
 
         /* محتوى البطاقات */
@@ -173,6 +202,13 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .card-header h3 {
+            color: var(--dark);
+            font-size: 1.3rem;
         }
 
         .btn {
@@ -180,13 +216,33 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
             background: var(--primary);
             color: white;
         }
 
+        .btn-primary:hover {
+            background: #b3001e;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        /* الجداول */
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 1rem;
         }
 
         th, td {
@@ -198,6 +254,24 @@
         th {
             background: var(--light);
             font-weight: 600;
+            color: var(--dark);
+        }
+
+        .status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-active {
+            background: #e7f7ef;
+            color: var(--success);
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: var(--warning);
         }
 
         .action-buttons {
@@ -210,8 +284,96 @@
             font-size: 0.8rem;
         }
 
-        .btn-edit { background: var(--secondary); }
-        .btn-delete { background: #dc3545; }
+        .btn-edit {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background: #00622c;
+        }
+
+        .btn-delete {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: #c82333;
+        }
+
+        /* نموذج الإضافة */
+        .form-container {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* قسم لا يوجد بيانات */
+        .no-data {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+
+        .no-data i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            .content-section {
+                padding: 0 1rem 1rem;
+            }
+            
+            .topbar {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -234,7 +396,11 @@
                 </div>
                 <div class="menu-item">
                     <i class="fas fa-users"></i>
-                    <span>المستخدمين</span>
+                    <span>إدارة المستخدمين</span>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>التقارير</span>
                 </div>
             </div>
         </div>
@@ -244,7 +410,7 @@
             <!-- الشريط العلوي -->
             <div class="topbar">
                 <a href="index.html" class="back-btn">
-                    <i class="fas fa-arrow-right"></i> العودة للموقع
+                    <i class="fas fa-arrow-right"></i> العودة للموقع الرئيسي
                 </a>
                 
                 <div class="user-info">
@@ -253,8 +419,8 @@
                     </button>
                     <div class="user-avatar">AD</div>
                     <div>
-                        <div>مدير النظام</div>
-                        <small>admin</small>
+                        <div>أحمد الدسوقي</div>
+                        <small>مدير النظام</small>
                     </div>
                 </div>
             </div>
@@ -266,7 +432,7 @@
                         <i class="fas fa-download"></i>
                     </div>
                     <div class="stat-info">
-                        <h3 id="totalDownloads">0</h3>
+                        <h3 id="totalDownloads">5,361</h3>
                         <p>إجمالي التنزيلات</p>
                     </div>
                 </div>
@@ -276,8 +442,8 @@
                         <i class="fas fa-users"></i>
                     </div>
                     <div class="stat-info">
-                        <h3 id="totalUsers">0</h3>
-                        <p>المستخدمين</p>
+                        <h3 id="totalUsers">1,787</h3>
+                        <p>المستخدمين النشطين</p>
                     </div>
                 </div>
                 
@@ -286,8 +452,18 @@
                         <i class="fas fa-mobile-alt"></i>
                     </div>
                     <div class="stat-info">
-                        <h3 id="totalApps">0</h3>
-                        <p>التطبيقات</p>
+                        <h3 id="totalApps">8</h3>
+                        <p>التطبيقات المنشورة</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon icon-revenue">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalRevenue">536</h3>
+                        <p>الإيرادات ($)</p>
                     </div>
                 </div>
             </div>
@@ -296,14 +472,62 @@
             <div class="content-section">
                 <div class="content-card">
                     <div class="card-header">
-                        <h3><i class="fas fa-mobile-alt"></i> التطبيقات</h3>
-                        <button class="btn" onclick="addNewApp()">
-                            <i class="fas fa-plus"></i> إضافة تطبيق
+                        <h3><i class="fas fa-mobile-alt"></i> إدارة التطبيقات</h3>
+                        <button class="btn btn-primary" onclick="showAppForm()">
+                            <i class="fas fa-plus"></i> إضافة تطبيق جديد
                         </button>
                     </div>
 
+                    <!-- نموذج إضافة تطبيق -->
+                    <div class="form-container" id="appForm">
+                        <h4>إضافة تطبيق جديد</h4>
+                        <div class="form-group">
+                            <label>اسم التطبيق</label>
+                            <input type="text" id="appName" class="form-control" placeholder="أدخل اسم التطبيق">
+                        </div>
+                        <div class="form-group">
+                            <label>وصف التطبيق</label>
+                            <textarea id="appDescription" class="form-control" placeholder="أدخل وصف التطبيق"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>رابط التحميل</label>
+                            <input type="text" id="appUrl" class="form-control" placeholder="https://example.com/app.apk">
+                        </div>
+                        <button class="btn btn-success" onclick="addNewApp()">
+                            <i class="fas fa-save"></i> حفظ التطبيق
+                        </button>
+                        <button class="btn" onclick="hideAppForm()" style="background: #6c757d; color: white;">
+                            <i class="fas fa-times"></i> إلغاء
+                        </button>
+                    </div>
+
+                    <!-- قائمة التطبيقات -->
                     <div id="appsList">
                         <!-- التطبيقات تظهر هنا -->
+                    </div>
+                </div>
+
+                <!-- قسم الإحصائيات السريعة -->
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-line"></i> الإحصائيات السريعة</h3>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                            <div style="font-size: 2rem; color: var(--primary);">📱</div>
+                            <div style="font-weight: bold;">أكثر تطبيق تحميلاً</div>
+                            <div style="color: #666;">سودان ميوزك</div>
+                        </div>
+                        <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                            <div style="font-size: 2rem; color: var(--secondary);">⭐</div>
+                            <div style="font-weight: bold;">أعلى تقييم</div>
+                            <div style="color: #666;">سودان نيوز</div>
+                        </div>
+                        <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 8px;">
+                            <div style="font-size: 2rem; color: #ff6b35;">🆕</div>
+                            <div style="font-weight: bold;">أحدث إضافة</div>
+                            <div style="color: #666;">سوق سوداني</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -311,10 +535,60 @@
     </div>
 
     <script>
-        // تحقق من التسجيل
+        // تحقق من تسجيل الدخول
         if (localStorage.getItem('sudanPlayAdmin') !== 'true') {
-            alert('يجب تسجيل الدخول أولاً');
+            alert('يجب تسجيل الدخول للوصول إلى لوحة التحكم');
             window.location.href = 'login.html';
+        }
+
+        // بيانات التطبيقات الافتراضية
+        const defaultApps = [
+            {
+                id: 1,
+                name: "سودان نيوز",
+                description: "تطبيق الأخبار السودانية - آخر المستجدات والأخبار العاجلة",
+                downloads: 1542,
+                version: "2.1.0",
+                status: "نشط",
+                rating: "4.8",
+                createdAt: "2024-01-15"
+            },
+            {
+                id: 2, 
+                name: "سودان ميوزك",
+                description: "استمع لأفضل الموسيقى السودانية التقليدية والعصرية",
+                downloads: 2876,
+                version: "1.5.2", 
+                status: "نشط",
+                rating: "4.9",
+                createdAt: "2024-01-10"
+            },
+            {
+                id: 3,
+                name: "سوق سوداني",
+                description: "منصة تسوق إلكتروني للسلع والمنتجات السودانية الأصيلة",
+                downloads: 943,
+                version: "3.0.1",
+                status: "نشط",
+                rating: "4.6",
+                createdAt: "2024-01-20"
+            }
+        ];
+
+        // دالة الحصول على التطبيقات
+        function getApps() {
+            let apps = localStorage.getItem('sudanPlayApps');
+            if (!apps) {
+                // إذا لا توجد بيانات، استخدم البيانات الافتراضية
+                saveApps(defaultApps);
+                return defaultApps;
+            }
+            return JSON.parse(apps);
+        }
+
+        // دالة حفظ التطبيقات
+        function saveApps(apps) {
+            localStorage.setItem('sudanPlayApps', JSON.stringify(apps));
         }
 
         // دالة تسجيل الخروج
@@ -323,14 +597,51 @@
             window.location.href = 'index.html';
         }
 
-        // دالة الحصول على التطبيقات
-        function getApps() {
-            return JSON.parse(localStorage.getItem('sudanPlayApps') || '[]');
+        // دالة عرض نموذج إضافة تطبيق
+        function showAppForm() {
+            document.getElementById('appForm').style.display = 'block';
         }
 
-        // دالة حفظ التطبيقات
-        function saveApps(apps) {
-            localStorage.setItem('sudanPlayApps', JSON.stringify(apps));
+        // دالة إخفاء نموذج إضافة تطبيق
+        function hideAppForm() {
+            document.getElementById('appForm').style.display = 'none';
+            // مسح الحقول
+            document.getElementById('appName').value = '';
+            document.getElementById('appDescription').value = '';
+            document.getElementById('appUrl').value = '';
+        }
+
+        // دالة إضافة تطبيق جديد
+        function addNewApp() {
+            const name = document.getElementById('appName').value;
+            const description = document.getElementById('appDescription').value;
+            const url = document.getElementById('appUrl').value;
+            
+            if (!name) {
+                alert('يرجى إدخال اسم التطبيق');
+                return;
+            }
+            
+            const newApp = {
+                id: Date.now(),
+                name: name,
+                description: description,
+                downloadUrl: url || '#',
+                downloads: 0,
+                version: "1.0.0",
+                status: "نشط",
+                rating: "4.5",
+                createdAt: new Date().toLocaleDateString('ar-EG')
+            };
+            
+            const apps = getApps();
+            apps.push(newApp);
+            saveApps(apps);
+            
+            alert('تم إضافة التطبيق بنجاح!');
+            hideAppForm();
+            loadApps();
+            updateStats();
         }
 
         // دالة تحميل التطبيقات
@@ -339,7 +650,13 @@
             const container = document.getElementById('appsList');
             
             if (apps.length === 0) {
-                container.innerHTML = '<p style="text-align: center; padding: 2rem;">لا توجد تطبيقات بعد</p>';
+                container.innerHTML = `
+                    <div class="no-data">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h4>لا توجد تطبيقات</h4>
+                        <p>لم يتم إضافة أي تطبيقات بعد</p>
+                    </div>
+                `;
                 return;
             }
             
@@ -349,7 +666,10 @@
                         <tr>
                             <th>اسم التطبيق</th>
                             <th>الوصف</th>
+                            <th>الإصدار</th>
                             <th>التنزيلات</th>
+                            <th>التقييم</th>
+                            <th>الحالة</th>
                             <th>الإجراءات</th>
                         </tr>
                     </thead>
@@ -357,15 +677,18 @@
                         ${apps.map(app => `
                             <tr>
                                 <td><strong>${app.name}</strong></td>
-                                <td>${app.description || 'لا يوجد وصف'}</td>
-                                <td>${app.downloads || 0}</td>
+                                <td>${app.description}</td>
+                                <td>${app.version}</td>
+                                <td>${app.downloads.toLocaleString()}</td>
+                                <td>⭐ ${app.rating}</td>
+                                <td><span class="status status-active">${app.status}</span></td>
                                 <td>
                                     <div class="action-buttons">
                                         <button class="btn btn-sm btn-edit" onclick="editApp(${app.id})">
-                                            تعديل
+                                            <i class="fas fa-edit"></i> تعديل
                                         </button>
                                         <button class="btn btn-sm btn-delete" onclick="deleteApp(${app.id})">
-                                            حذف
+                                            <i class="fas fa-trash"></i> حذف
                                         </button>
                                     </div>
                                 </td>
@@ -376,54 +699,67 @@
             `;
         }
 
-        // دالة إضافة تطبيق جديد
-        function addNewApp() {
-            const name = prompt('أدخل اسم التطبيق الجديد:');
-            if (name) {
+        // دالة حذف تطبيق
+        function deleteApp(appId) {
+            if (confirm('هل أنت متأكد من حذف هذا التطبيق؟')) {
                 const apps = getApps();
-                const newApp = {
-                    id: Date.now(),
-                    name: name,
-                    description: 'تطبيق جديد',
-                    downloads: 0,
-                    status: 'active'
-                };
-                
-                apps.push(newApp);
-                saveApps(apps);
-                alert('تم إضافة التطبيق بنجاح!');
+                const updatedApps = apps.filter(app => app.id !== appId);
+                saveApps(updatedApps);
                 loadApps();
                 updateStats();
+                alert('تم حذف التطبيق بنجاح');
             }
         }
 
-        // دالة حذف تطبيق
-        function deleteApp(appId) {
-            if (confirm('هل أنت متأكد من الحذف؟')) {
-                const apps = getApps();
-                const newApps = apps.filter(app => app.id !== appId);
-                saveApps(newApps);
-                loadApps();
-                updateStats();
+        // دالة تعديل تطبيق
+        function editApp(appId) {
+            const apps = getApps();
+            const app = apps.find(a => a.id === appId);
+            if (app) {
+                const newName = prompt('اسم التطبيق الجديد:', app.name);
+                if (newName) {
+                    app.name = newName;
+                    saveApps(apps);
+                    loadApps();
+                    alert('تم تعديل التطبيق بنجاح');
+                }
             }
         }
 
         // دالة تحديث الإحصائيات
         function updateStats() {
             const apps = getApps();
-            const totalDownloads = apps.reduce((sum, app) => sum + (app.downloads || 0), 0);
+            const totalDownloads = apps.reduce((sum, app) => sum + app.downloads, 0);
             const totalApps = apps.length;
+            const totalUsers = Math.floor(totalDownloads / 3);
+            const totalRevenue = Math.floor(totalDownloads * 0.1);
             
-            document.getElementById('totalDownloads').textContent = totalDownloads;
+            document.getElementById('totalDownloads').textContent = totalDownloads.toLocaleString();
             document.getElementById('totalApps').textContent = totalApps;
-            document.getElementById('totalUsers').textContent = Math.floor(totalDownloads / 3);
+            document.getElementById('totalUsers').textContent = totalUsers.toLocaleString();
+            document.getElementById('totalRevenue').textContent = totalRevenue.toLocaleString();
+        }
+
+        // محاكاة زيادة التنزيلات تلقائياً
+        function simulateDownloads() {
+            setInterval(() => {
+                const apps = getApps();
+                if (apps.length > 0) {
+                    const randomApp = apps[Math.floor(Math.random() * apps.length)];
+                    randomApp.downloads += Math.floor(Math.random() * 10) + 1;
+                    saveApps(apps);
+                    loadApps();
+                    updateStats();
+                }
+            }, 10000); // كل 10 ثواني
         }
 
         // عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', function() {
             loadApps();
             updateStats();
-            console.log('✅ لوحة التحكم جاهزة!');
+            simulateDownloads();
+            console.log('🚀 لوحة التحكم جاهزة ومليئة بالبيانات!');
         });
     </script>
 </body>
