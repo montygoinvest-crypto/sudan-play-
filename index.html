@@ -640,7 +640,7 @@
 
     <!-- قسم التطبيقات -->
     <section class="apps-section" id="apps">
-        <h2 class="section-title">التطبيقات</h2>
+        <h2 class="section-title">تطبيقاتنا المميزة</h2>
         
         <!-- فئات التطبيقات -->
         <div class="categories">
@@ -649,7 +649,6 @@
             <button class="category-btn" onclick="filterApps('موسيقى')">موسيقى</button>
             <button class="category-btn" onclick="filterApps('تسوق')">تسوق</button>
             <button class="category-btn" onclick="filterApps('تعليم')">تعليم</button>
-           
         </div>
 
         <div class="apps-grid" id="appsContainer">
@@ -659,7 +658,7 @@
 
     <!-- قسم المميزات -->
     <section class="features" id="features">
-        <h2 class="section-title"> Sudan Play</h2>
+        <h2 class="section-title">لماذا تختار Sudan Play؟</h2>
         <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">
@@ -695,7 +694,7 @@
     <!-- الفوتر -->
     <footer id="contact">
         <div class="footer-content">
-            <h3><i class="fas fa-globe-africa"></i> Sudan Play-for Monty GO SDN CO-LTD</h3>
+            <h3><i class="fas fa-globe-africa"></i> Sudan Play</h3>
             <p>منصة التطبيقات السودانية الرائدة - نوفر أفضل التجارب الرقمية لمجتمعنا</p>
             
             <div class="social-links">
@@ -706,13 +705,13 @@
             </div>
             
             <div class="company-info">
-                <p>© 2025 جميع الحقوق محفوظة  Sudan Play</p>
+                <p>© 2024 جميع الحقوق محفوظة لشركة Sudan Play</p>
                 <p style="margin-top: 0.5rem; font-weight: bold; font-size: 1.1rem;">
                     <i class="fas fa-building"></i> Monty Go SDN -Co-Ltd
                 </p>
                 <p style="margin-top: 0.5rem;">
-                    <i class="fas fa-envelope"></i> montygosdn@gmail.com | 
-                    <i class="fas fa-phone"></i> 249127432167+ watsapp
+                    <i class="fas fa-envelope"></i> info@sudanplay.com | 
+                    <i class="fas fa-phone"></i> 249127432167+
                 </p>
             </div>
         </div>
@@ -727,8 +726,99 @@
     <script>
         // بيانات التطبيقات الحقيقية
         const realApps = [
-             [
-          
+            {
+                id: 1,
+                name: "سودان نيوز",
+                description: "تطبيق متكامل يقدم آخر الأخبار السودانية من مصادر موثوقة. احصل على التحديثات الفورية والأخبار العاجلة في جميع المجالات السياسية والاقتصادية والرياضية.",
+                category: "أخبار",
+                icon: "https://images.unsplash.com/photo-1586339949216-35c2747cc36c?w=200&h=200&fit=crop",
+                screenshots: [
+                    "https://images.unsplash.com/photo-1556655848-f3a79cc6d4a9?w=300&h=600&fit=crop",
+                    "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=300&h=600&fit=crop"
+                ],
+                downloads: 12543,
+                version: "2.1.0",
+                rating: "4.8",
+                size: "15 MB",
+                downloadUrl: "#"
+            },
+            {
+                id: 2, 
+                name: "سودان ميوزك",
+                description: "أكبر منصة موسيقية سودانية تحتوي على آلاف الأغاني من التراث السوداني والموسيقى المعاصرة. استمع وتحميل ومشاركة أفضل الألحان.",
+                category: "موسيقى",
+                icon: "https://images.unsplash.com/photo-1571974599782-87624638275f?w=200&h=200&fit=crop",
+                screenshots: [
+                    "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=300&h=600&fit=crop"
+                ],
+                downloads: 28764,
+                version: "1.5.2", 
+                rating: "4.9",
+                size: "28 MB",
+                downloadUrl: "#"
+            },
+            {
+                id: 3,
+                name: "سوق سوداني",
+                description: "منصة تسوق إلكتروني تتيح لك شراء وبيع المنتجات السودانية الأصيلة. تسوق من آلاف المتاجر المحلية بثقة وسهولة.",
+                category: "تسوق",
+                icon: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=200&h=200&fit=crop",
+                screenshots: [
+                    "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=300&h=600&fit=crop",
+                    "https://images.unsplash.com/photo-1556742044-3c52d6e88c62?w=300&h=600&fit=crop"
+                ],
+                downloads: 8943,
+                version: "3.0.1",
+                rating: "4.6",
+                size: "42 MB",
+                downloadUrl: "#"
+            },
+            {
+                id: 4,
+                name: "تعلم العربية",
+                description: "تطبيق تعليمي مميز لتعليم اللغة العربية بأسلوب تفاعلي. مناسب لجميع الأعمال مع دروس متنوعة وتمارين تفاعلية.",
+                category: "تعليم",
+                icon: "https://images.unsplash.com/photo-1589998059171-988d887df646?w=200&h=200&fit=crop",
+                screenshots: [
+                    "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=300&h=600&fit=crop"
+                ],
+                downloads: 15632,
+                version: "1.2.3",
+                rating: "4.7",
+                size: "35 MB",
+                downloadUrl: "#"
+            },
+            {
+                id: 5,
+                name: "أخبار الرياضة",
+                description: "تابع آخر أخبار الرياضة السودانية والعالمية. تغطية شاملة للدوري السوداني وبطولات أفريقيا والعالم.",
+                category: "أخبار",
+                icon: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=200&h=200&fit=crop",
+                screenshots: [
+                    "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=300&h=600&fit=crop"
+                ],
+                downloads: 9876,
+                version: "2.0.5",
+                rating: "4.5",
+                size: "22 MB",
+                downloadUrl: "#"
+            },
+            {
+                id: 6,
+                name: "موسيقى حضرية",
+                description: "استمع لأحدث الأغاني الحضرية السودانية. تطبيق مخصص لعشاق الموسيقى الحضرية بميزات متقدمة.",
+                category: "موسيقى",
+                icon: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=200&h=200&fit=crop",
+                screenshots: [
+                    "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=600&fit=crop"
+                ],
+                downloads: 13456,
+                version: "1.8.2",
+                rating: "4.4",
+                size: "31 MB",
+                downloadUrl: "#"
+            }
+        ];
 
         // دالة تحميل التطبيقات
         function loadApps(category = 'all') {
